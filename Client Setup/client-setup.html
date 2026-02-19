@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agilon — Client Setup</title>
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-hover: #1347b8;
+            --primary-light: #e8eefb;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+            --green: #16a34a;
+            --green-light: #dcfce7;
+            --red: #dc2626;
+            --white: #ffffff;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.08);
+            --radius: 10px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+
+        /* ── Top Bar ── */
+        .topbar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .topbar .logo { font-size: 1.4em; font-weight: 700; color: var(--primary); }
+        .topbar .help { font-size: 0.9em; color: var(--gray); cursor: pointer; }
+        .topbar .help:hover { color: var(--primary); }
+
+        /* ── Progress Bar ── */
+        .progress-container {
+            max-width: 720px;
+            margin: 32px auto 0;
+            padding: 0 20px;
+        }
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 40px;
+            right: 40px;
+            height: 3px;
+            background: var(--border);
+            z-index: 0;
+        }
+        .progress-fill {
+            position: absolute;
+            top: 18px;
+            left: 40px;
+            height: 3px;
+            background: var(--primary);
+            z-index: 1;
+            transition: width 0.4s ease;
+        }
+        .step-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            cursor: default;
+        }
+        .step-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9em;
+            color: var(--gray-light);
+            transition: all 0.3s ease;
+        }
+        .step-indicator.active .step-circle {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: var(--white);
+        }
+        .step-indicator.completed .step-circle {
+            border-color: var(--green);
+            background: var(--green);
+            color: var(--white);
+        }
+        .step-label {
+            margin-top: 8px;
+            font-size: 0.8em;
+            color: var(--gray-light);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .step-indicator.active .step-label { color: var(--primary); font-weight: 600; }
+        .step-indicator.completed .step-label { color: var(--green); }
+
+        /* ── Card ── */
+        .card-container {
+            max-width: 720px;
+            margin: 28px auto 40px;
+            padding: 0 20px;
+        }
+        .card {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+        .card h2 {
+            font-size: 1.6em;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+        .card .card-desc {
+            color: var(--gray);
+            font-size: 0.95em;
+            margin-bottom: 28px;
+        }
+
+        /* ── Form ── */
+        .form-group {
+            margin-bottom: 22px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+        .form-group .hint {
+            font-size: 0.8em;
+            color: var(--gray-light);
+            margin-bottom: 6px;
+        }
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95em;
+            color: var(--dark);
+            background: var(--white);
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1);
+        }
+        textarea { resize: vertical; min-height: 80px; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* ── Radio Cards ── */
+        .radio-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .radio-card {
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--white);
+        }
+        .radio-card:hover { border-color: var(--primary); background: var(--primary-light); }
+        .radio-card.selected { border-color: var(--primary); background: var(--primary-light); }
+        .radio-card .rc-icon { font-size: 1.6em; margin-bottom: 6px; }
+        .radio-card .rc-label { font-weight: 600; font-size: 0.9em; color: var(--dark); }
+        .radio-card .rc-desc { font-size: 0.78em; color: var(--gray); margin-top: 2px; }
+
+        /* ── File Upload ── */
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--light);
+        }
+        .upload-area:hover { border-color: var(--primary); background: var(--primary-light); }
+        .upload-area .upload-icon { font-size: 2em; color: var(--gray-light); }
+        .upload-area .upload-text { color: var(--gray); font-size: 0.9em; margin-top: 8px; }
+        .upload-area .upload-text span { color: var(--primary); font-weight: 600; }
+
+        /* ── Color Picker ── */
+        .color-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .color-swatch {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .color-swatch:hover { transform: scale(1.1); }
+        .color-swatch.selected { border-color: var(--dark); box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--dark); }
+        .color-custom {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px dashed var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: var(--gray-light);
+        }
+
+        /* ── Templates ── */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .template-card {
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .template-card:hover { border-color: var(--primary); }
+        .template-card.selected { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(26,86,219,0.2); }
+        .template-preview {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+        }
+        .template-info {
+            padding: 10px 14px;
+            border-top: 1px solid var(--border);
+        }
+        .template-info .t-name { font-weight: 600; font-size: 0.9em; color: var(--dark); }
+        .template-info .t-desc { font-size: 0.78em; color: var(--gray); }
+
+        /* ── Skills Checkboxes ── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .skill-card {
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--white);
+        }
+        .skill-card:hover { border-color: var(--primary); }
+        .skill-card.selected { border-color: var(--primary); background: var(--primary-light); }
+        .skill-check {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid var(--border);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+            transition: all 0.2s;
+        }
+        .skill-card.selected .skill-check {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        .skill-icon { font-size: 1.4em; flex-shrink: 0; }
+        .skill-info { flex: 1; }
+        .skill-name { font-weight: 600; font-size: 0.95em; color: var(--dark); }
+        .skill-desc { font-size: 0.8em; color: var(--gray); margin-top: 2px; }
+
+        /* ── Review ── */
+        .review-section {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+        .review-section h4 {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        .review-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 0.93em;
+        }
+        .review-row .r-label { color: var(--gray); }
+        .review-row .r-value { font-weight: 600; color: var(--dark); }
+        .review-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        .review-skill-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* ── Buttons ── */
+        .btn-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-secondary {
+            background: var(--white);
+            color: var(--gray);
+            border: 1.5px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--gray-light); color: var(--dark); }
+        .btn-success {
+            background: var(--green);
+            color: var(--white);
+            font-size: 1.05em;
+            padding: 14px 36px;
+        }
+        .btn-success:hover { background: #15803d; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ── Validation Errors ── */
+        .form-group.error input,
+        .form-group.error select,
+        .form-group.error textarea {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+        .form-group.error .radio-cards,
+        .error-highlight {
+            border: 2px solid var(--red);
+            border-radius: 8px;
+            padding: 2px;
+        }
+        .error-msg {
+            color: var(--red);
+            font-size: 0.8em;
+            margin-top: 4px;
+            display: none;
+        }
+        .form-group.error .error-msg { display: block; }
+        .error-highlight .error-msg { display: block; color: var(--red); font-size: 0.8em; margin-top: 6px; }
+        .validation-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: var(--red);
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .validation-toast.show { opacity: 1; transform: translateY(0); }
+
+        /* ── Step visibility ── */
+        .step-content { display: none; }
+        .step-content.active { display: block; }
+
+        /* ── Success screen ── */
+        .success-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.4em;
+        }
+        .success-screen h2 { color: var(--dark); margin-bottom: 8px; }
+        .success-screen p { color: var(--gray); max-width: 400px; margin: 0 auto; }
+        .success-actions { margin-top: 28px; display: flex; gap: 12px; justify-content: center; }
+
+        /* ── Provisioning animation ── */
+        .provisioning {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border: 4px solid var(--border);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 24px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .prov-steps { max-width: 340px; margin: 20px auto 0; text-align: left; }
+        .prov-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 0.93em;
+            color: var(--gray-light);
+        }
+        .prov-step.done { color: var(--green); }
+        .prov-step.active { color: var(--dark); font-weight: 600; }
+        .prov-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            flex-shrink: 0;
+        }
+        .prov-step.done .prov-dot { background: var(--green); }
+        .prov-step.active .prov-dot { background: var(--primary); animation: pulse 1s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    </style>
+</head>
+<body>
+
+    <!-- Validation Toast -->
+    <div class="validation-toast" id="validationToast"></div>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="logo">Agilon</div>
+        <div class="help">Need help?</div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-container">
+        <div class="progress-steps">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            <div class="step-indicator active" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Business Info</div>
+            </div>
+            <div class="step-indicator" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Branding</div>
+            </div>
+            <div class="step-indicator" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Skills</div>
+            </div>
+            <div class="step-indicator" data-step="4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Review</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card -->
+    <div class="card-container">
+        <div class="card">
+
+            <!-- ═══ STEP 1: Business Info ═══ -->
+            <div class="step-content active" id="step1">
+                <h2>Tell us about your business</h2>
+                <p class="card-desc">We'll use this to personalize your Agilon experience.</p>
+
+                <div class="form-group" id="grpName">
+                    <label>Business Name <span style="color:var(--red)">*</span></label>
+                    <input type="text" id="bizName" placeholder="e.g. Smith Consulting LLC" oninput="clearError('grpName')">
+                    <div class="error-msg">Business name is required</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" id="grpIndustry">
+                        <label>Industry <span style="color:var(--red)">*</span></label>
+                        <select id="bizIndustry" onchange="clearError('grpIndustry')">
+                            <option value="">Select your industry...</option>
+                            <option>Professional Services</option>
+                            <option>Healthcare</option>
+                            <option>Construction & Trades</option>
+                            <option>Retail & E-commerce</option>
+                            <option>Food & Hospitality</option>
+                            <option>Technology</option>
+                            <option>Real Estate</option>
+                            <option>Transportation</option>
+                            <option>Education</option>
+                            <option>Creative & Media</option>
+                            <option>Other</option>
+                        </select>
+                        <div class="error-msg">Please select your industry</div>
+                    </div>
+                    <div class="form-group" id="grpState">
+                        <label>State <span style="color:var(--red)">*</span></label>
+                        <select id="bizState" onchange="clearError('grpState')">
+                            <option value="">Select state...</option>
+                            <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+                            <option>Arkansas</option><option>California</option><option>Colorado</option>
+                            <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+                            <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                            <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+                            <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+                            <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+                            <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                            <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+                            <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+                            <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+                            <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                            <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+                            <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+                            <option>Texas</option><option>Utah</option><option>Vermont</option>
+                            <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                            <option>Wisconsin</option><option>Wyoming</option>
+                        </select>
+                        <div class="error-msg">Please select your state</div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="grpSize">
+                    <label>Company Size <span style="color:var(--red)">*</span></label>
+                    <div class="radio-cards" id="sizeCards">
+                        <div class="radio-card" onclick="selectSize(this, 'Just me')">
+                            <div class="rc-icon">&#128100;</div>
+                            <div class="rc-label">Just Me</div>
+                            <div class="rc-desc">Sole proprietor</div>
+                        </div>
+                        <div class="radio-card" onclick="selectSize(this, '2-10')">
+                            <div class="rc-icon">&#128101;</div>
+                            <div class="rc-label">2–10</div>
+                            <div class="rc-desc">Small team</div>
+                        </div>
+                        <div class="radio-card" onclick="selectSize(this, '11-50')">
+                            <div class="rc-icon">&#127970;</div>
+                            <div class="rc-label">11–50</div>
+                            <div class="rc-desc">Growing business</div>
+                        </div>
+                    </div>
+                    <div class="error-msg">Please select your company size</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Brief Description <span style="color:var(--gray-light); font-weight:400;">(optional)</span></label>
+                    <textarea id="bizDesc" placeholder="Tell us a bit about what your business does..."></textarea>
+                </div>
+
+                <div class="btn-row" style="justify-content: flex-end;">
+                    <button class="btn btn-primary" onclick="goToStep(2)">Continue &rarr;</button>
+                </div>
+            </div>
+
+            <!-- ═══ STEP 2: Branding & Style ═══ -->
+            <div class="step-content" id="step2">
+                <h2>Set up your brand</h2>
+                <p class="card-desc">Customize how your Agilon workspace looks and feels.</p>
+
+                <div class="form-group">
+                    <label>Choose a Template</label>
+                    <div class="template-grid">
+                        <div class="template-card" onclick="selectTemplate(this, 'Modern')">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #1a56db, #7c3aed);">&#9878;&#65039;</div>
+                            <div class="template-info"><div class="t-name">Modern</div><div class="t-desc">Clean, minimal look</div></div>
+                        </div>
+                        <div class="template-card" onclick="selectTemplate(this, 'Classic')">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #1e3a5f, #2d5a87);">&#128188;</div>
+                            <div class="template-info"><div class="t-name">Classic</div><div class="t-desc">Professional, traditional</div></div>
+                        </div>
+                        <div class="template-card" onclick="selectTemplate(this, 'Bold')">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #dc2626, #ea580c);">&#128293;</div>
+                            <div class="template-info"><div class="t-name">Bold</div><div class="t-desc">Vibrant, eye-catching</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Your Logo</label>
+                    <div class="upload-area" onclick="document.getElementById('logoInput').click()">
+                        <div class="upload-icon">&#128228;</div>
+                        <div class="upload-text"><span>Click to upload</span> or drag and drop<br>SVG, PNG, JPG (max 2MB)</div>
+                        <input type="file" id="logoInput" accept="image/*" style="display:none" onchange="handleLogo(this)">
+                    </div>
+                    <div id="logoPreview" style="margin-top:8px; font-size:0.85em; color:var(--green); display:none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Brand Color</label>
+                    <p class="hint">Choose a primary color for your workspace</p>
+                    <div class="color-options">
+                        <div class="color-swatch" style="background:#1a56db" onclick="selectColor(this, '#1a56db')"></div>
+                        <div class="color-swatch" style="background:#7c3aed" onclick="selectColor(this, '#7c3aed')"></div>
+                        <div class="color-swatch" style="background:#dc2626" onclick="selectColor(this, '#dc2626')"></div>
+                        <div class="color-swatch" style="background:#ea580c" onclick="selectColor(this, '#ea580c')"></div>
+                        <div class="color-swatch" style="background:#16a34a" onclick="selectColor(this, '#16a34a')"></div>
+                        <div class="color-swatch" style="background:#0891b2" onclick="selectColor(this, '#0891b2')"></div>
+                        <div class="color-swatch" style="background:#4f46e5" onclick="selectColor(this, '#4f46e5')"></div>
+                        <div class="color-swatch" style="background:#1e293b" onclick="selectColor(this, '#1e293b')"></div>
+                        <div class="color-custom" title="Custom color">+</div>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-secondary" onclick="goToStep(1)">&larr; Back</button>
+                    <button class="btn btn-primary" onclick="goToStep(3)">Continue &rarr;</button>
+                </div>
+            </div>
+
+            <!-- ═══ STEP 3: Skills ═══ -->
+            <div class="step-content" id="step3">
+                <h2>Choose your skills</h2>
+                <p class="card-desc">Select the back-office modules you need. You can always add more later.</p>
+
+                <div class="skills-grid">
+                    <div class="skill-card" onclick="toggleSkill(this, 'Accounting')">
+                        <div class="skill-check"></div>
+                        <div class="skill-icon">&#128202;</div>
+                        <div class="skill-info">
+                            <div class="skill-name">Accounting</div>
+                            <div class="skill-desc">Bookkeeping, invoicing, financial reporting</div>
+                        </div>
+                    </div>
+                    <div class="skill-card" onclick="toggleSkill(this, 'HR')">
+                        <div class="skill-check"></div>
+                        <div class="skill-icon">&#128101;</div>
+                        <div class="skill-info">
+                            <div class="skill-name">HR</div>
+                            <div class="skill-desc">Employee management, payroll, benefits</div>
+                        </div>
+                    </div>
+                    <div class="skill-card" onclick="toggleSkill(this, 'Tax')">
+                        <div class="skill-check"></div>
+                        <div class="skill-icon">&#128203;</div>
+                        <div class="skill-info">
+                            <div class="skill-name">Tax</div>
+                            <div class="skill-desc">Tax preparation, filing, compliance</div>
+                        </div>
+                    </div>
+                    <div class="skill-card" onclick="toggleSkill(this, 'Scheduling')">
+                        <div class="skill-check"></div>
+                        <div class="skill-icon">&#128197;</div>
+                        <div class="skill-info">
+                            <div class="skill-name">Scheduling</div>
+                            <div class="skill-desc">Appointments, calendar, resource booking</div>
+                        </div>
+                    </div>
+                    <div class="skill-card" onclick="toggleSkill(this, 'VDR')">
+                        <div class="skill-check"></div>
+                        <div class="skill-icon">&#128274;</div>
+                        <div class="skill-info">
+                            <div class="skill-name">VDR</div>
+                            <div class="skill-desc">Virtual Data Room — secure doc sharing</div>
+                        </div>
+                    </div>
+                    <div class="skill-card" onclick="toggleSkill(this, 'IT')">
+                        <div class="skill-check"></div>
+                        <div class="skill-icon">&#128187;</div>
+                        <div class="skill-info">
+                            <div class="skill-name">IT</div>
+                            <div class="skill-desc">IT support, device management, helpdesk</div>
+                        </div>
+                    </div>
+                    <div class="skill-card" onclick="toggleSkill(this, 'Legal')">
+                        <div class="skill-check"></div>
+                        <div class="skill-icon">&#9878;&#65039;</div>
+                        <div class="skill-info">
+                            <div class="skill-name">Legal</div>
+                            <div class="skill-desc">Contract management, compliance, legal docs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-secondary" onclick="goToStep(2)">&larr; Back</button>
+                    <button class="btn btn-primary" onclick="goToStep(4)">Continue &rarr;</button>
+                </div>
+            </div>
+
+            <!-- ═══ STEP 4: Review ═══ -->
+            <div class="step-content" id="step4">
+                <h2>Review & Launch</h2>
+                <p class="card-desc">Everything look good? We'll set up your Agilon workspace.</p>
+
+                <div class="review-section">
+                    <h4>Business Information</h4>
+                    <div class="review-row"><span class="r-label">Business Name</span><span class="r-value" id="revName">—</span></div>
+                    <div class="review-row"><span class="r-label">Industry</span><span class="r-value" id="revIndustry">—</span></div>
+                    <div class="review-row"><span class="r-label">State</span><span class="r-value" id="revState">—</span></div>
+                    <div class="review-row"><span class="r-label">Company Size</span><span class="r-value" id="revSize">—</span></div>
+                </div>
+
+                <div class="review-section">
+                    <h4>Branding</h4>
+                    <div class="review-row"><span class="r-label">Template</span><span class="r-value" id="revTemplate">—</span></div>
+                    <div class="review-row"><span class="r-label">Logo</span><span class="r-value" id="revLogo">—</span></div>
+                    <div class="review-row">
+                        <span class="r-label">Brand Color</span>
+                        <span class="r-value" id="revColor">—</span>
+                    </div>
+                </div>
+
+                <div class="review-section">
+                    <h4>Selected Skills</h4>
+                    <div class="review-skills" id="revSkills">
+                        <span style="color:var(--gray-light); font-size:0.9em;">No skills selected</span>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-secondary" onclick="goToStep(3)">&larr; Back</button>
+                    <button class="btn btn-success" onclick="launchSetup()">&#9889; Launch My Agilon &rarr;</button>
+                </div>
+            </div>
+
+            <!-- ═══ PROVISIONING ═══ -->
+            <div class="step-content" id="stepProv">
+                <div class="provisioning">
+                    <div class="spinner"></div>
+                    <h2>Setting up your workspace...</h2>
+                    <p style="color:var(--gray); margin-top:8px;">This will only take a moment.</p>
+                    <div class="prov-steps">
+                        <div class="prov-step active" id="prov1"><div class="prov-dot"></div>Creating your Agilon Bot on Aedify...</div>
+                        <div class="prov-step" id="prov2"><div class="prov-dot"></div>Provisioning cloud storage...</div>
+                        <div class="prov-step" id="prov3"><div class="prov-dot"></div>Installing selected skills...</div>
+                        <div class="prov-step" id="prov4"><div class="prov-dot"></div>Applying your branding...</div>
+                        <div class="prov-step" id="prov5"><div class="prov-dot"></div>Finalizing workspace...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ SUCCESS ═══ -->
+            <div class="step-content" id="stepSuccess">
+                <div class="success-screen">
+                    <div class="success-icon">&#10003;</div>
+                    <h2>Your Agilon is ready!</h2>
+                    <p>Your workspace has been set up with your bot, storage, and selected skills. You're all set to go.</p>
+                    <div class="success-actions">
+                        <button class="btn btn-primary" onclick="alert('Opening Web App...')">Open Web App</button>
+                        <button class="btn btn-secondary" onclick="alert('Showing QR Code...')">Get Mobile QR Code</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ── State ──
+        let currentStep = 1;
+        let formData = {
+            name: '', industry: '', state: '', size: '', description: '',
+            template: '', logo: null, color: '',
+            skills: []
+        };
+
+        // ── Validation Helpers ──
+        function showToast(msg) {
+            const toast = document.getElementById('validationToast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function setError(groupId) {
+            document.getElementById(groupId).classList.add('error');
+        }
+
+        function clearError(groupId) {
+            document.getElementById(groupId).classList.remove('error');
+        }
+
+        function clearAllErrors() {
+            document.querySelectorAll('.form-group.error').forEach(g => g.classList.remove('error'));
+            document.querySelectorAll('.error-highlight').forEach(g => g.classList.remove('error-highlight'));
+        }
+
+        // ── Step Validators ──
+        function validateStep1() {
+            clearAllErrors();
+            let valid = true;
+            const errors = [];
+
+            if (!document.getElementById('bizName').value.trim()) {
+                setError('grpName'); valid = false; errors.push('Business Name');
+            }
+            if (!document.getElementById('bizIndustry').value) {
+                setError('grpIndustry'); valid = false; errors.push('Industry');
+            }
+            if (!document.getElementById('bizState').value) {
+                setError('grpState'); valid = false; errors.push('State');
+            }
+            if (!formData.size) {
+                setError('grpSize'); valid = false; errors.push('Company Size');
+            }
+
+            if (!valid) {
+                showToast('Please fill in: ' + errors.join(', '));
+            }
+            return valid;
+        }
+
+        function validateStep2() {
+            clearAllErrors();
+            let valid = true;
+            const errors = [];
+
+            if (!formData.template) {
+                const grid = document.querySelector('.template-grid');
+                grid.classList.add('error-highlight');
+                valid = false;
+                errors.push('Template');
+            }
+            if (!formData.color) {
+                const colors = document.querySelector('.color-options');
+                colors.classList.add('error-highlight');
+                valid = false;
+                errors.push('Brand Color');
+            }
+
+            if (!valid) {
+                showToast('Please select: ' + errors.join(', '));
+            }
+            return valid;
+        }
+
+        function validateStep3() {
+            if (formData.skills.length === 0) {
+                showToast('Please select at least one skill to continue');
+                return false;
+            }
+            return true;
+        }
+
+        // ── Navigation ──
+        function goToStep(step) {
+            // Validate before moving forward
+            if (step > currentStep) {
+                if (currentStep === 1 && !validateStep1()) return;
+                if (currentStep === 2 && !validateStep2()) return;
+                if (currentStep === 3 && !validateStep3()) return;
+            }
+
+            clearAllErrors();
+
+            // Sync form data
+            formData.name = document.getElementById('bizName').value.trim();
+            formData.industry = document.getElementById('bizIndustry').value;
+            formData.state = document.getElementById('bizState').value;
+
+            // Hide all
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+
+            // Update indicators
+            document.querySelectorAll('.step-indicator').forEach(ind => {
+                const s = parseInt(ind.dataset.step);
+                ind.classList.remove('active', 'completed');
+                if (s < step) ind.classList.add('completed');
+                if (s === step) ind.classList.add('active');
+            });
+
+            // Update checkmarks
+            document.querySelectorAll('.step-indicator.completed .step-circle').forEach(c => {
+                c.textContent = '\u2713';
+            });
+            document.querySelectorAll('.step-indicator:not(.completed) .step-circle').forEach(c => {
+                if (!c.closest('.step-indicator').classList.contains('active') && !c.closest('.step-indicator').classList.contains('completed')) {
+                    c.textContent = c.closest('.step-indicator').dataset.step;
+                }
+            });
+
+            // Progress fill
+            const fillPercents = { 1: '0%', 2: '33%', 3: '66%', 4: '100%' };
+            document.getElementById('progressFill').style.width = fillPercents[step] || '100%';
+
+            currentStep = step;
+
+            // Populate review
+            if (step === 4) populateReview();
+        }
+
+        // ── Step 1 helpers ──
+        function selectSize(el, size) {
+            document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            formData.size = size;
+            clearError('grpSize');
+        }
+
+        // ── Step 2 helpers ──
+        function selectTemplate(el, name) {
+            document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            formData.template = name;
+            document.querySelector('.template-grid').classList.remove('error-highlight');
+        }
+
+        function handleLogo(input) {
+            if (input.files.length > 0) {
+                formData.logo = input.files[0].name;
+                const preview = document.getElementById('logoPreview');
+                preview.textContent = '\u2713 ' + input.files[0].name;
+                preview.style.display = 'block';
+            }
+        }
+
+        function selectColor(el, color) {
+            document.querySelectorAll('.color-swatch').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            formData.color = color;
+            document.querySelector('.color-options').classList.remove('error-highlight');
+        }
+
+        // ── Step 3 helpers ──
+        function toggleSkill(el, name) {
+            el.classList.toggle('selected');
+            if (el.classList.contains('selected')) {
+                el.querySelector('.skill-check').textContent = '\u2713';
+                if (!formData.skills.includes(name)) formData.skills.push(name);
+            } else {
+                el.querySelector('.skill-check').textContent = '';
+                formData.skills = formData.skills.filter(s => s !== name);
+            }
+        }
+
+        // ── Step 4 Review ──
+        function populateReview() {
+            document.getElementById('revName').textContent = formData.name || '\u2014';
+            document.getElementById('revIndustry').textContent = formData.industry || '\u2014';
+            document.getElementById('revState').textContent = formData.state || '\u2014';
+            document.getElementById('revSize').textContent = formData.size || '\u2014';
+            document.getElementById('revTemplate').textContent = formData.template || '\u2014';
+            document.getElementById('revLogo').textContent = formData.logo || 'Not uploaded';
+
+            const colorEl = document.getElementById('revColor');
+            if (formData.color) {
+                colorEl.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:' + formData.color + ';vertical-align:middle;margin-right:6px;"></span>' + formData.color;
+            } else {
+                colorEl.textContent = '\u2014';
+            }
+
+            const skillsEl = document.getElementById('revSkills');
+            if (formData.skills.length > 0) {
+                skillsEl.innerHTML = formData.skills.map(s => '<span class="review-skill-badge">' + s + '</span>').join('');
+            } else {
+                skillsEl.innerHTML = '<span style="color:var(--gray-light); font-size:0.9em;">No skills selected</span>';
+            }
+        }
+
+        // ── Launch ──
+        function launchSetup() {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('stepProv').classList.add('active');
+
+            // Hide progress bar
+            document.querySelector('.progress-container').style.opacity = '0.3';
+
+            // Simulate provisioning steps
+            const steps = ['prov1', 'prov2', 'prov3', 'prov4', 'prov5'];
+            let i = 0;
+
+            function nextProvStep() {
+                if (i > 0) {
+                    document.getElementById(steps[i - 1]).classList.remove('active');
+                    document.getElementById(steps[i - 1]).classList.add('done');
+                }
+                if (i < steps.length) {
+                    document.getElementById(steps[i]).classList.add('active');
+                    i++;
+                    setTimeout(nextProvStep, 1200);
+                } else {
+                    // Done — show success
+                    setTimeout(() => {
+                        document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+                        document.getElementById('stepSuccess').classList.add('active');
+                    }, 600);
+                }
+            }
+            nextProvStep();
+        }
+    </script>
+</body>
+</html>

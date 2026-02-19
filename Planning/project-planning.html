@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agilon — Project Planning</title>
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-light: #e8eefb;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+            --green: #16a34a;
+            --orange: #ea580c;
+            --purple: #7c3aed;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--light);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), #0f3a8a);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.8em; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .header .subtitle { font-size: 1.3em; opacity: 0.9; font-weight: 300; }
+        .header .date { margin-top: 15px; font-size: 0.9em; opacity: 0.7; }
+
+        /* Container */
+        .container { max-width: 960px; margin: 0 auto; padding: 40px 20px; }
+
+        /* Section */
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 36px;
+            margin-bottom: 28px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .section h2 {
+            font-size: 1.5em;
+            color: var(--primary);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        .section h3 { font-size: 1.15em; color: var(--dark); margin: 18px 0 10px; }
+        .section p { color: var(--gray); margin-bottom: 12px; }
+        .section ul { padding-left: 22px; color: var(--gray); }
+        .section ul li { margin-bottom: 6px; }
+
+        /* Highlight box */
+        .highlight {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+            font-size: 1.05em;
+            color: var(--dark);
+        }
+
+        /* Flow diagram */
+        .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+        .flow-step {
+            background: var(--primary);
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-align: center;
+        }
+        .flow-arrow { color: var(--primary); font-size: 1.4em; font-weight: bold; }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--gray);
+        }
+        tr:hover td { background: var(--light); }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .badge-now { background: #dcfce7; color: var(--green); }
+        .badge-future { background: #fff7ed; color: var(--orange); }
+
+        /* Cards grid */
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 16px 0; }
+        .card {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .card .icon { font-size: 2em; margin-bottom: 8px; }
+        .card .label { font-weight: 600; color: var(--dark); font-size: 1em; }
+        .card .desc { font-size: 0.85em; color: var(--gray); margin-top: 4px; }
+
+        /* Workflow diagram */
+        .workflow {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+            justify-content: center;
+        }
+        .wf-step {
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-align: center;
+        }
+        .wf-ai { background: #dbeafe; color: #1d4ed8; }
+        .wf-human { background: #fce7f3; color: #be185d; }
+        .wf-arrow { color: var(--gray); font-size: 1.1em; }
+
+        /* Stats */
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .stat .number { font-size: 2em; font-weight: 700; color: var(--primary); }
+        .stat .label { font-size: 0.85em; color: var(--gray); margin-top: 4px; }
+
+        /* Infra row */
+        .infra-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+        .infra-item {
+            text-align: center;
+            padding: 18px;
+            background: var(--primary-light);
+            border-radius: 10px;
+        }
+        .infra-item .icon { font-size: 1.6em; margin-bottom: 6px; }
+        .infra-item .label { font-weight: 600; color: var(--dark); font-size: 0.95em; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--gray);
+            font-size: 0.85em;
+            border-top: 1px solid var(--border);
+            margin-top: 20px;
+        }
+
+        /* Two-col layout */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 16px 0; }
+        .col-box {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .col-box h4 { color: var(--primary); margin-bottom: 8px; }
+        .col-box ul { padding-left: 18px; }
+        .col-box li { color: var(--gray); margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Agilon</h1>
+        <div class="subtitle">The Operating System for SMEs</div>
+        <div class="date">Project Planning Document — February 2026</div>
+    </div>
+
+    <div class="container">
+
+        <!-- Vision -->
+        <div class="section">
+            <h2>Vision</h2>
+            <p>Agilon is the <strong>Operating System for Small and Medium Enterprises</strong>, built to serve 36 million SMEs in the US — including 31 million non-employee firms (sole proprietors, freelancers, single-member LLCs).</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="number">36M</div>
+                    <div class="label">Total SMEs (TAM)</div>
+                </div>
+                <div class="stat">
+                    <div class="number">31M</div>
+                    <div class="label">Non-Employee Firms</div>
+                </div>
+                <div class="stat">
+                    <div class="number">~5M</div>
+                    <div class="label">Employer SMEs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Flow -->
+        <div class="section">
+            <h2>Core Flow</h2>
+            <div class="flow">
+                <div class="flow-step">Login</div>
+                <div class="flow-arrow">&#8594;</div>
+                <div class="flow-step">Onboarding</div>
+                <div class="flow-arrow">&#8594;</div>
+                <div class="flow-step">Provisioning</div>
+                <div class="flow-arrow">&#8594;</div>
+                <div class="flow-step">Deployment</div>
+            </div>
+
+            <h3>1. Login</h3>
+            <p>User authenticates into the Agilon platform.</p>
+
+            <h3>2. Onboarding</h3>
+            <p>Two sets of information are collected:</p>
+            <div class="two-col">
+                <div class="col-box">
+                    <h4>Basic Info</h4>
+                    <ul>
+                        <li>Industry</li>
+                        <li>Company size</li>
+                        <li>State</li>
+                    </ul>
+                </div>
+                <div class="col-box">
+                    <h4>Style</h4>
+                    <ul>
+                        <li>Templates</li>
+                        <li>Logo</li>
+                        <li>Color</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>3. Provisioning</h3>
+            <p>Happens automatically after account creation. Two resources are created in parallel on Aedify.ai:</p>
+            <div class="two-col">
+                <div class="col-box">
+                    <h4>A. Dedicated Agilon Bot</h4>
+                    <ul>
+                        <li>Agilon logs into Aedify and assigns a dedicated bot</li>
+                        <li>OpenClaw-like bot based on <strong>Nanobot</strong> (small open-source model)</li>
+                        <li>This bot is the <strong>core</strong> of the client's experience</li>
+                    </ul>
+                </div>
+                <div class="col-box">
+                    <h4>B. Client Cloud Storage</h4>
+                    <ul>
+                        <li>Dedicated cloud storage for client's data</li>
+                        <li>Separate from bot's database (LightSQL)</li>
+                        <li>Client data in cloud storage; bot state in LightSQL</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>4. Deployment</h3>
+            <table>
+                <tr><th>Channel</th><th>Access Method</th></tr>
+                <tr><td><strong>Web App</strong></td><td>Direct browser URL</td></tr>
+                <tr><td><strong>Mobile App</strong></td><td>QR Code</td></tr>
+            </table>
+        </div>
+
+        <!-- Skills: Back-Office -->
+        <div class="section">
+            <h2>Skills — Back-Office Modules <span class="badge badge-now">Phase 1</span></h2>
+            <p>Skills are modular back-office capabilities that clients choose and activate. Each skill adds a specific business function to their Agilon Bot.</p>
+
+            <div class="cards">
+                <div class="card"><div class="icon">&#128202;</div><div class="label">Accounting</div><div class="desc">Bookkeeping, invoicing, financial reporting</div></div>
+                <div class="card"><div class="icon">&#128101;</div><div class="label">HR</div><div class="desc">Employee management, payroll, benefits</div></div>
+                <div class="card"><div class="icon">&#128203;</div><div class="label">Tax</div><div class="desc">Tax preparation, filing, compliance</div></div>
+                <div class="card"><div class="icon">&#128197;</div><div class="label">Scheduling</div><div class="desc">Appointments, calendar, resource booking</div></div>
+                <div class="card"><div class="icon">&#128274;</div><div class="label">VDR</div><div class="desc">Virtual Data Room — secure doc sharing</div></div>
+                <div class="card"><div class="icon">&#128187;</div><div class="label">IT</div><div class="desc">IT support, device management, helpdesk</div></div>
+                <div class="card"><div class="icon">&#9878;&#65039;</div><div class="label">Legal</div><div class="desc">Contract management, compliance, legal docs</div></div>
+            </div>
+
+            <div class="highlight">
+                <strong>Concept:</strong> Clients pick the skills they need &rarr; the bot is equipped with those capabilities &rarr; the bot becomes their personalized back-office operating system.
+            </div>
+        </div>
+
+        <!-- Skills: Front-Office -->
+        <div class="section">
+            <h2>Skills — Front-Office Modules <span class="badge badge-future">Future</span></h2>
+            <p>Industry-specific front-office modules will be added gradually to serve different SME verticals:</p>
+
+            <table>
+                <tr><th>Vertical</th><th>Examples</th></tr>
+                <tr><td><strong>Healthcare</strong></td><td>Patient scheduling, records, billing</td></tr>
+                <tr><td><strong>Repair Services</strong></td><td>Job tracking, estimates, parts inventory</td></tr>
+                <tr><td><strong>Ride / Delivery</strong></td><td>Route management, earnings tracking</td></tr>
+                <tr><td><strong>Freelancers</strong></td><td>Ad creation, content generation, client management</td></tr>
+                <tr><td><strong>More...</strong></td><td>Additional verticals over time</td></tr>
+            </table>
+
+            <div class="highlight">
+                <strong>Roadmap:</strong> Back-office skills first (universal) &rarr; Front-office skills added per vertical (industry-specific).
+            </div>
+        </div>
+
+        <!-- Custom Workflows -->
+        <div class="section">
+            <h2>Custom Workflows</h2>
+            <p>Clients can <strong>create their own workflows</strong> — a key differentiator. Each step in a workflow can be handled by:</p>
+
+            <table>
+                <tr><th>Executor Type</th><th>Description</th></tr>
+                <tr><td><strong>AI Agent</strong></td><td>Automated — handled by the Agilon Bot / AI</td></tr>
+                <tr><td><strong>Human</strong></td><td>Manual — assigned to a real person</td></tr>
+                <tr><td><strong>Hybrid</strong></td><td>AI does the work, human reviews/approves</td></tr>
+            </table>
+
+            <h3>Example: Invoice Processing</h3>
+            <div class="workflow">
+                <div class="wf-step wf-ai">Receive Invoice (AI)</div>
+                <div class="wf-arrow">&#8594;</div>
+                <div class="wf-step wf-ai">Extract Data (AI)</div>
+                <div class="wf-arrow">&#8594;</div>
+                <div class="wf-step wf-human">Review &amp; Approve (Human)</div>
+                <div class="wf-arrow">&#8594;</div>
+                <div class="wf-step wf-ai">Book Entry (AI)</div>
+                <div class="wf-arrow">&#8594;</div>
+                <div class="wf-step wf-ai">Notify Client (AI)</div>
+            </div>
+
+            <p>This gives clients full flexibility to design processes that match how their business actually works — mixing automation with human judgment wherever needed.</p>
+        </div>
+
+        <!-- Infrastructure -->
+        <div class="section">
+            <h2>Infrastructure</h2>
+            <p>Cloud Provider: <strong>Aedify.ai</strong></p>
+            <div class="infra-grid">
+                <div class="infra-item"><div class="icon">&#9881;&#65039;</div><div class="label">CPU</div></div>
+                <div class="infra-item"><div class="icon">&#128313;</div><div class="label">GPU</div></div>
+                <div class="infra-item"><div class="icon">&#128451;&#65039;</div><div class="label">Storage</div></div>
+                <div class="infra-item"><div class="icon">&#127760;</div><div class="label">Bandwidth</div></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Agilon Project Planning &mdash; February 2026 &mdash; Confidential
+    </div>
+
+</body>
+</html>

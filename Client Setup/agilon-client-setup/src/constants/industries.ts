@@ -1,0 +1,17 @@
+export const INDUSTRIES = [
+  'Sole Proprietorship',
+  'Single-Member LLC',
+  'Multi-Member LLC',
+  'S Corporation',
+  'C Corporation',
+  'General Partnership',
+  'Limited Partnership (LP)',
+  'Limited Liability Partnership (LLP)',
+  'Limited Liability Limited Partnership (LLLP)',
+  'Nonprofit Corporation',
+  'Professional Corporation (PC)',
+  'Professional LLC (PLLC)',
+  'Benefit Corporation',
+  'Cooperative (Co-op)',
+  'Other',
+] as const;
