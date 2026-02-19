@@ -212,7 +212,7 @@ export function Provisioning() {
           if (cancelled) return;
           useSetupStore.getState().setProvisioning(false);
           useSetupStore.getState().setComplete(true);
-          useSetupStore.getState().setStep(5);
+          useSetupStore.getState().setStep(4);
         }, 800);
       }
     }

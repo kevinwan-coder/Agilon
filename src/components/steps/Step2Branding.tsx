@@ -11,7 +11,7 @@ import { StepCard } from '../layout/StepCard';
 import type { TemplateName } from '../../types/setup';
 
 export function Step2Branding() {
-  const { branding, updateBranding, setStep } = useSetupStore();
+  const { branding, updateBranding, setStep, setProvisioning } = useSetupStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [toast, setToast] = useState('');
 
@@ -33,8 +33,9 @@ export function Step2Branding() {
       return;
     }
     setErrors({});
+    setProvisioning(true);
     setStep(3);
-  }, [branding, setStep]);
+  }, [branding, setStep, setProvisioning]);
 
   return (
     <StepCard>

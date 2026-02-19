@@ -24,7 +24,7 @@ export function Success() {
         </p>
 
         <div className="flex gap-3 justify-center mt-7">
-          <Button onClick={() => setStep(6)}>Open Web App</Button>
+          <Button onClick={() => setStep(5)}>Open Web App</Button>
           <Button variant="secondary" onClick={() => alert('Showing QR Code...')}>
             Get Mobile QR Code
           </Button>

@@ -277,30 +277,6 @@
         .template-info .t-name { font-weight: 600; font-size: 0.9em; color: var(--dark); }
         .template-info .t-desc { font-size: 0.78em; color: var(--gray); }
 
-        /* ── Review ── */
-        .review-section {
-            background: var(--light);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin-bottom: 16px;
-        }
-        .review-section h4 {
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--gray);
-            margin-bottom: 10px;
-        }
-        .review-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            font-size: 0.93em;
-        }
-        .review-row .r-label { color: var(--gray); }
-        .review-row .r-value { font-weight: 600; color: var(--dark); }
-
         /* ── Buttons ── */
         .btn-row {
             display: flex;
@@ -464,10 +440,6 @@
                 <div class="step-circle">2</div>
                 <div class="step-label">Branding</div>
             </div>
-            <div class="step-indicator" data-step="3">
-                <div class="step-circle">3</div>
-                <div class="step-label">Review</div>
-            </div>
         </div>
     </div>
 
@@ -614,36 +586,7 @@
 
                 <div class="btn-row">
                     <button class="btn btn-secondary" onclick="goToStep(1)">&larr; Back</button>
-                    <button class="btn btn-primary" onclick="goToStep(3)">Continue &rarr;</button>
-                </div>
-            </div>
-
-            <!-- ═══ STEP 3: Review ═══  -->
-            <div class="step-content" id="step3">
-                <h2>Review & Launch</h2>
-                <p class="card-desc">Everything look good? We'll set up your Agilon workspace.</p>
-
-                <div class="review-section">
-                    <h4>Business Information</h4>
-                    <div class="review-row"><span class="r-label">Business Name</span><span class="r-value" id="revName">—</span></div>
-                    <div class="review-row"><span class="r-label">Industry</span><span class="r-value" id="revIndustry">—</span></div>
-                    <div class="review-row"><span class="r-label">State</span><span class="r-value" id="revState">—</span></div>
-                    <div class="review-row"><span class="r-label">Company Size</span><span class="r-value" id="revSize">—</span></div>
-                </div>
-
-                <div class="review-section">
-                    <h4>Branding</h4>
-                    <div class="review-row"><span class="r-label">Template</span><span class="r-value" id="revTemplate">—</span></div>
-                    <div class="review-row"><span class="r-label">Logo</span><span class="r-value" id="revLogo">—</span></div>
-                    <div class="review-row">
-                        <span class="r-label">Brand Color</span>
-                        <span class="r-value" id="revColor">—</span>
-                    </div>
-                </div>
-
-                <div class="btn-row">
-                    <button class="btn btn-secondary" onclick="goToStep(2)">&larr; Back</button>
-                    <button class="btn btn-success" onclick="launchSetup()">&#9889; Launch My Agilon &rarr;</button>
+                    <button class="btn btn-primary" onclick="launchSetup()">Continue &rarr;</button>
                 </div>
             </div>
 
@@ -794,13 +737,10 @@
             });
 
             // Progress fill
-            const fillPercents = { 1: '0%', 2: '50%', 3: '100%' };
+            const fillPercents = { 1: '0%', 2: '100%' };
             document.getElementById('progressFill').style.width = fillPercents[step] || '100%';
 
             currentStep = step;
-
-            // Populate review
-            if (step === 3) populateReview();
         }
 
         // ── Step 1 helpers ──
@@ -835,25 +775,9 @@
             document.querySelector('.color-options').classList.remove('error-highlight');
         }
 
-        // ── Step 3 Review ──
-        function populateReview() {
-            document.getElementById('revName').textContent = formData.name || '\u2014';
-            document.getElementById('revIndustry').textContent = formData.industry || '\u2014';
-            document.getElementById('revState').textContent = formData.state || '\u2014';
-            document.getElementById('revSize').textContent = formData.size || '\u2014';
-            document.getElementById('revTemplate').textContent = formData.template || '\u2014';
-            document.getElementById('revLogo').textContent = formData.logo || 'Not uploaded';
-
-            const colorEl = document.getElementById('revColor');
-            if (formData.color) {
-                colorEl.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:' + formData.color + ';vertical-align:middle;margin-right:6px;"></span>' + formData.color;
-            } else {
-                colorEl.textContent = '\u2014';
-            }
-        }
-
         // ── Launch ──
         function launchSetup() {
+            if (!validateStep2()) return;
             document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
             document.getElementById('stepProv').classList.add('active');
 
