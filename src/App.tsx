@@ -1,4 +1,3 @@
-import { AnimatePresence } from 'framer-motion';
 import { useSetupStore } from './store/useSetupStore';
 import { TopBar } from './components/layout/TopBar';
 import { Step1BusinessInfo } from './components/steps/Step1BusinessInfo';

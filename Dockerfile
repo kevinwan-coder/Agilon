@@ -1,9 +1,9 @@
 # Stage 1: Build
 FROM node:22-alpine AS build
 WORKDIR /app
-COPY "Client Setup/agilon-client-setup/package.json" "Client Setup/agilon-client-setup/package-lock.json" ./
+COPY package.json package-lock.json ./
 RUN npm ci
-COPY "Client Setup/agilon-client-setup/" .
+COPY . .
 RUN npm run build
 
 # Stage 2: Serve with nginx
