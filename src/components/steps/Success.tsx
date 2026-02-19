@@ -20,11 +20,11 @@ export function Success() {
 
         <h2 className="text-2xl font-bold text-dark mb-2">Your Agilon is ready!</h2>
         <p className="text-gray max-w-[400px] mx-auto">
-          Your workspace has been set up with your bot, storage, and selected skills. You're all set to go.
+          Your workspace has been set up and ready to go.
         </p>
 
         <div className="flex gap-3 justify-center mt-7">
-          <Button onClick={() => setStep(7)}>Open Web App</Button>
+          <Button onClick={() => setStep(6)}>Open Web App</Button>
           <Button variant="secondary" onClick={() => alert('Showing QR Code...')}>
             Get Mobile QR Code
           </Button>

@@ -1,11 +1,10 @@
-import { useEffect, useState, useRef, useMemo } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSetupStore } from '../../store/useSetupStore';
 
 const PROV_STEPS = [
   { label: 'Creating your Agilon Bot on Aedify...', icon: '\uD83E\uDD16' },
   { label: 'Provisioning cloud storage...', icon: '\u2601\uFE0F' },
-  { label: 'Installing selected skills...', icon: '\u2699\uFE0F' },
   { label: 'Applying your branding...', icon: '\uD83C\uDFA8' },
   { label: 'Finalizing workspace...', icon: '\u26A1' },
 ];
@@ -25,16 +24,12 @@ const CODE_LINES = [
   { text: '200 OK — bucket: agl-store-8f3k2-us', type: 'success' },
   { text: 'Mounting encrypted volume /mnt/client/8f3k2...', type: 'info' },
   { text: 'AES-256-GCM encryption enabled', type: 'success' },
-  { text: 'Installing skill: accounting@latest — resolving dependencies...', type: 'cmd' },
-  { text: 'ledger-core@3.2.1  tax-engine@1.8.0  invoice-gen@2.1.4', type: 'dep' },
-  { text: 'Installing skill: hr@latest — resolving dependencies...', type: 'cmd' },
-  { text: 'payroll-core@4.0.2  compliance-us@2.3.1', type: 'dep' },
   { text: 'Running database migrations: 12 tables created', type: 'success' },
   { text: 'Applying branding: template=modern, color=#1a56db', type: 'cmd' },
   { text: 'Generating assets: favicon, email templates, PDF headers...', type: 'info' },
   { text: 'POST /v1/dns/register { "subdomain": "client-8f3k2" }', type: 'cmd' },
   { text: 'SSL certificate issued — auto-renew enabled', type: 'success' },
-  { text: 'Health: bot [PASS]  storage [PASS]  skills [PASS]  dns [PASS]', type: 'health' },
+  { text: 'Health: bot [PASS]  storage [PASS]  dns [PASS]', type: 'health' },
   { text: 'Workspace ready. All systems operational.', type: 'final' },
 ];
 
@@ -168,16 +163,18 @@ function ProgressRing({ progress }: { progress: number }) {
   );
 }
 
+// Pre-generated particle data (module-level to avoid impure calls during render)
+const PARTICLE_DATA = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  left: `${Math.random() * 100}%`,
+  delay: Math.random() * 4,
+  duration: 3 + Math.random() * 4,
+  size: 2 + Math.random() * 3,
+}));
+
 // Floating particles background
 function Particles() {
-  const particles = useMemo(() =>
-    Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      delay: Math.random() * 4,
-      duration: 3 + Math.random() * 4,
-      size: 2 + Math.random() * 3,
-    })), []);
+  const particles = PARTICLE_DATA;
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -215,7 +212,7 @@ export function Provisioning() {
           if (cancelled) return;
           useSetupStore.getState().setProvisioning(false);
           useSetupStore.getState().setComplete(true);
-          useSetupStore.getState().setStep(6);
+          useSetupStore.getState().setStep(5);
         }, 800);
       }
     }

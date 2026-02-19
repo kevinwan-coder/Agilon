@@ -34,10 +34,9 @@ export interface Branding {
 export interface SetupData {
   businessInfo: BusinessInfo;
   branding: Branding;
-  skills: SkillId[];
 }
 
-export type ProvisioningStep = 'bot' | 'storage' | 'skills' | 'branding' | 'finalizing' | 'complete';
+export type ProvisioningStep = 'bot' | 'storage' | 'branding' | 'finalizing' | 'complete';
 
 export interface ProvisioningStatus {
   step: ProvisioningStep;

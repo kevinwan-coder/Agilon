@@ -3,13 +3,12 @@ import { useSetupStore } from '../../store/useSetupStore';
 const STEPS = [
   { num: 1, label: 'Business Info' },
   { num: 2, label: 'Branding' },
-  { num: 3, label: 'Skills' },
-  { num: 4, label: 'Review' },
+  { num: 3, label: 'Review' },
 ];
 
 export function ProgressBar() {
   const currentStep = useSetupStore((s) => s.currentStep);
-  const fillPercent = { 1: '0%', 2: '33%', 3: '66%', 4: '100%' }[currentStep] || '0%';
+  const fillPercent = { 1: '0%', 2: '50%', 3: '100%' }[currentStep] || '0%';
 
   return (
     <div className="max-w-[720px] mx-auto mt-8 px-5">

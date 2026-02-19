@@ -1,5 +1,4 @@
 import { useSetupStore } from '../../store/useSetupStore';
-import { SKILLS } from '../../constants/skills';
 import { Button } from '../ui/Button';
 import { StepCard } from '../layout/StepCard';
 
@@ -22,14 +21,10 @@ function ReviewRow({ label, value }: { label: string; value: React.ReactNode }) 
 }
 
 export function Step4Review() {
-  const { businessInfo, branding, skills, setStep, setProvisioning } = useSetupStore();
-
-  const skillNames = skills
-    .map((id) => SKILLS.find((s) => s.id === id)?.name)
-    .filter(Boolean);
+  const { businessInfo, branding, setStep, setProvisioning } = useSetupStore();
 
   const handleLaunch = () => {
-    setStep(5);
+    setStep(4);
     setProvisioning(true);
   };
 
@@ -66,25 +61,8 @@ export function Step4Review() {
         />
       </ReviewSection>
 
-      <ReviewSection title="Selected Skills">
-        <div className="flex flex-wrap gap-2 mt-1">
-          {skillNames.length > 0 ? (
-            skillNames.map((name) => (
-              <span
-                key={name}
-                className="bg-primary-light text-primary px-3 py-1 rounded-full text-sm font-semibold"
-              >
-                {name}
-              </span>
-            ))
-          ) : (
-            <span className="text-gray-light text-sm">No skills selected</span>
-          )}
-        </div>
-      </ReviewSection>
-
       <div className="flex justify-between mt-8 pt-6 border-t border-border">
-        <Button variant="secondary" onClick={() => setStep(3)}>&larr; Back</Button>
+        <Button variant="secondary" onClick={() => setStep(2)}>&larr; Back</Button>
         <Button variant="success" onClick={handleLaunch}>
           {'\u26A1'} Launch My Agilon &rarr;
         </Button>
