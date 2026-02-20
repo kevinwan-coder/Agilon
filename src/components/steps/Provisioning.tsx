@@ -133,7 +133,7 @@ function ProgressRing({ progress }: { progress: number }) {
   return (
     <div className="relative w-[100px] h-[100px] mx-auto mb-6">
       <svg width="100" height="100" className="rotate-[-90deg]">
-        <circle cx="50" cy="50" r={radius} stroke="#e2e8f0" strokeWidth={stroke} fill="none" />
+        <circle cx="50" cy="50" r={radius} stroke="#333333" strokeWidth={stroke} fill="none" />
         <motion.circle
           cx="50" cy="50" r={radius}
           stroke="url(#grad)" strokeWidth={stroke} fill="none"
@@ -226,7 +226,7 @@ export function Provisioning() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative bg-white rounded-2xl shadow-[0_4px_40px_rgba(0,0,0,0.06)] border border-border overflow-hidden"
+        className="relative bg-[#1a1a1a] rounded-2xl shadow-[0_4px_40px_rgba(0,0,0,0.3)] border border-border overflow-hidden"
       >
         <Particles />
 

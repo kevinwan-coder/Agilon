@@ -80,7 +80,7 @@ export function WorkflowsPage() {
         {workflows.map((wf) => {
           const status = STATUS_STYLES[wf.status];
           return (
-            <div key={wf.id} className="bg-white rounded-xl border border-border p-6 hover:shadow-md transition-shadow">
+            <div key={wf.id} className="bg-[#1a1a1a] rounded-xl border border-border p-6 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <h3 className="text-lg font-semibold text-dark">{wf.name}</h3>

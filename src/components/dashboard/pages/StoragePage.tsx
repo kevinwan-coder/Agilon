@@ -27,7 +27,7 @@ export function StoragePage() {
       </div>
 
       {/* Storage bar */}
-      <div className="bg-white rounded-xl border border-border p-5 mb-6">
+      <div className="bg-[#1a1a1a] rounded-xl border border-border p-5 mb-6">
         <div className="flex items-center justify-between mb-2.5">
           <span className="text-sm font-semibold text-dark">Storage Usage</span>
           <span className="text-sm text-gray">{usedGB} GB of {totalGB} GB used</span>
@@ -46,7 +46,7 @@ export function StoragePage() {
       </div>
 
       {/* File list */}
-      <div className="bg-white rounded-xl border border-border">
+      <div className="bg-[#1a1a1a] rounded-xl border border-border">
         <div className="px-5 py-4 border-b border-border flex items-center justify-between">
           <h3 className="font-semibold text-dark">Files</h3>
           <div className="flex gap-2">

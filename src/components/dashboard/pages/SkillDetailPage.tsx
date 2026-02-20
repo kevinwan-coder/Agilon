@@ -87,7 +87,7 @@ export function SkillDetailPage({ skillId }: SkillDetailPageProps) {
       {details && (
         <div className="grid grid-cols-3 gap-4 mb-8">
           {details.stats.map((stat) => (
-            <div key={stat.label} className="bg-white rounded-xl border border-border p-5">
+            <div key={stat.label} className="bg-[#1a1a1a] rounded-xl border border-border p-5">
               <div className="text-sm text-gray mb-1">{stat.label}</div>
               <div className="text-2xl font-bold text-dark">{stat.value}</div>
             </div>
@@ -98,7 +98,7 @@ export function SkillDetailPage({ skillId }: SkillDetailPageProps) {
       <div className="grid grid-cols-2 gap-6">
         {/* Features */}
         {details && (
-          <div className="bg-white rounded-xl border border-border p-6">
+          <div className="bg-[#1a1a1a] rounded-xl border border-border p-6">
             <h3 className="text-lg font-semibold text-dark mb-4">Features</h3>
             <div className="space-y-2.5">
               {details.features.map((feature) => (
@@ -114,7 +114,7 @@ export function SkillDetailPage({ skillId }: SkillDetailPageProps) {
         )}
 
         {/* Quick Start */}
-        <div className="bg-white rounded-xl border border-border p-6">
+        <div className="bg-[#1a1a1a] rounded-xl border border-border p-6">
           <h3 className="text-lg font-semibold text-dark mb-4">Quick Start</h3>
           <p className="text-sm text-gray mb-4">
             Get started with {skill.name} by trying these common actions:

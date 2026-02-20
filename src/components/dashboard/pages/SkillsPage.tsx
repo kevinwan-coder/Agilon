@@ -22,7 +22,7 @@ export function SkillsPage() {
         </h2>
         <div className="grid grid-cols-3 gap-4">
           {activeSkills.map((skill) => (
-            <div key={skill.id} className="bg-white rounded-xl border border-border p-5 relative">
+            <div key={skill.id} className="bg-[#1a1a1a] rounded-xl border border-border p-5 relative">
               <div className="flex items-start justify-between mb-3">
                 <span className="text-2xl">{skill.icon}</span>
                 <div className="flex items-center gap-1.5">
@@ -56,7 +56,7 @@ export function SkillsPage() {
           </h2>
           <div className="grid grid-cols-3 gap-4">
             {availableSkills.map((skill) => (
-              <div key={skill.id} className="bg-white rounded-xl border border-border border-dashed p-5 opacity-80 hover:opacity-100 transition-opacity">
+              <div key={skill.id} className="bg-[#1a1a1a] rounded-xl border border-border border-dashed p-5 opacity-80 hover:opacity-100 transition-opacity">
                 <div className="flex items-start justify-between mb-3">
                   <span className="text-2xl">{skill.icon}</span>
                 </div>

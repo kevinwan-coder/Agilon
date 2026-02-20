@@ -49,7 +49,7 @@ export function BotChat({ open, onClose }: BotChatProps) {
           animate={{ width: 380, opacity: 1 }}
           exit={{ width: 0, opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="h-full bg-white border-l border-border flex flex-col overflow-hidden flex-shrink-0"
+          className="h-full bg-[#1a1a1a] border-l border-border flex flex-col overflow-hidden flex-shrink-0"
         >
           {/* Header */}
           <div className="p-4 border-b border-border flex items-center justify-between flex-shrink-0">

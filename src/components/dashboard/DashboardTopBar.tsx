@@ -4,7 +4,7 @@ export function DashboardTopBar() {
   const businessInfo = useSetupStore((s) => s.businessInfo);
 
   return (
-    <div className="h-[60px] bg-white border-b border-border flex items-center justify-end px-6 flex-shrink-0">
+    <div className="h-[60px] bg-[#1a1a1a] border-b border-border flex items-center justify-end px-6 flex-shrink-0">
       <div className="flex items-center gap-3">
         <button className="relative p-2 bg-transparent border-none cursor-pointer text-gray hover:text-dark transition-colors text-lg">
           {'\uD83D\uDD14'}

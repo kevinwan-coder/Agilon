@@ -13,7 +13,7 @@ export function SettingsPage() {
 
       <div className="grid grid-cols-2 gap-6">
         {/* Business Profile */}
-        <div className="bg-white rounded-xl border border-border p-6">
+        <div className="bg-[#1a1a1a] rounded-xl border border-border p-6">
           <h3 className="text-lg font-semibold text-dark mb-5">Business Profile</h3>
           <div className="space-y-4">
             <div>
@@ -39,7 +39,7 @@ export function SettingsPage() {
         </div>
 
         {/* Branding */}
-        <div className="bg-white rounded-xl border border-border p-6">
+        <div className="bg-[#1a1a1a] rounded-xl border border-border p-6">
           <h3 className="text-lg font-semibold text-dark mb-5">Branding</h3>
           <div className="space-y-4">
             <div>
@@ -66,7 +66,7 @@ export function SettingsPage() {
         </div>
 
         {/* Agilon Bot */}
-        <div className="bg-white rounded-xl border border-border p-6">
+        <div className="bg-[#1a1a1a] rounded-xl border border-border p-6">
           <h3 className="text-lg font-semibold text-dark mb-5">Agilon Bot</h3>
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -93,7 +93,7 @@ export function SettingsPage() {
         </div>
 
         {/* Deployment */}
-        <div className="bg-white rounded-xl border border-border p-6">
+        <div className="bg-[#1a1a1a] rounded-xl border border-border p-6">
           <h3 className="text-lg font-semibold text-dark mb-5">Deployment</h3>
           <div className="space-y-4">
             <div className="flex items-center justify-between p-3 bg-light rounded-lg">

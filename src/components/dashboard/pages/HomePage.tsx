@@ -11,7 +11,7 @@ interface StatCardProps {
 
 function StatCard({ label, value, change, positive, icon }: StatCardProps) {
   return (
-    <div className="bg-white rounded-xl border border-border p-5">
+    <div className="bg-[#1a1a1a] rounded-xl border border-border p-5">
       <div className="flex items-center justify-between mb-3">
         <span className="text-sm text-gray">{label}</span>
         <span className="text-xl">{icon}</span>
@@ -68,7 +68,7 @@ export function HomePage() {
 
       <div className="grid grid-cols-3 gap-6">
         {/* Recent Activity */}
-        <div className="col-span-2 bg-white rounded-xl border border-border">
+        <div className="col-span-2 bg-[#1a1a1a] rounded-xl border border-border">
           <div className="px-5 py-4 border-b border-border flex items-center justify-between">
             <h3 className="font-semibold text-dark">Recent Activity</h3>
             <button className="text-xs text-primary font-medium bg-transparent border-none cursor-pointer hover:underline">
@@ -91,7 +91,7 @@ export function HomePage() {
         {/* Quick Actions + Active Skills */}
         <div className="space-y-6">
           {/* Quick Actions */}
-          <div className="bg-white rounded-xl border border-border">
+          <div className="bg-[#1a1a1a] rounded-xl border border-border">
             <div className="px-5 py-4 border-b border-border">
               <h3 className="font-semibold text-dark">Quick Actions</h3>
             </div>
@@ -109,7 +109,7 @@ export function HomePage() {
           </div>
 
           {/* Active Skills */}
-          <div className="bg-white rounded-xl border border-border">
+          <div className="bg-[#1a1a1a] rounded-xl border border-border">
             <div className="px-5 py-4 border-b border-border flex items-center justify-between">
               <h3 className="font-semibold text-dark">Active Skills</h3>
               <span className="text-xs bg-primary-light text-primary px-2 py-0.5 rounded-full font-semibold">

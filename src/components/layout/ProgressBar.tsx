@@ -32,7 +32,7 @@ export function ProgressBar() {
                     ? 'border-green bg-green text-white'
                     : isActive
                     ? 'border-primary bg-primary text-white'
-                    : 'border-border bg-white text-gray-light'
+                    : 'border-border bg-[#252525] text-white/30'
                 }`}
               >
                 {isCompleted ? '\u2713' : num}

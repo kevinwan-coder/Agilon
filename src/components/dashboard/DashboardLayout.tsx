@@ -41,7 +41,7 @@ export function DashboardLayout({ children, activePage, onNavigate }: DashboardL
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 onFocus={() => { if (!chatOpen) setChatOpen(true); }}
-                className="w-full pl-12 pr-20 py-3.5 bg-white border border-border rounded-2xl text-sm text-dark placeholder:text-gray-light focus:outline-none focus:border-primary focus:shadow-[0_2px_20px_rgba(26,86,219,0.15)] shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-all"
+                className="w-full pl-12 pr-20 py-3.5 bg-[#1a1a1a] border border-border rounded-2xl text-sm text-dark placeholder:text-gray-light focus:outline-none focus:border-primary focus:shadow-[0_2px_20px_rgba(26,86,219,0.15)] shadow-[0_2px_12px_rgba(0,0,0,0.3)] transition-all"
               />
               <button
                 onClick={handleSubmit}

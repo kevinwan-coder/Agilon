@@ -23,7 +23,7 @@ export function Sidebar({ activePage, onNavigate }: SidebarProps) {
   const activeSkills = SKILLS.filter((s) => skills.includes(s.id));
 
   return (
-    <div className="w-[260px] bg-white border-r border-border flex flex-col h-full flex-shrink-0">
+    <div className="w-[260px] bg-[#1a1a1a] border-r border-border flex flex-col h-full flex-shrink-0">
       {/* Logo + Business */}
       <div className="p-5 border-b border-border">
         <div className="text-xl font-bold" style={{ color: branding.color || '#1a56db' }}>

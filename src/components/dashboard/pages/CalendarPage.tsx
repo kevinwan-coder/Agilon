@@ -113,7 +113,7 @@ export function CalendarPage() {
             <div className="flex items-center justify-between mb-6">
               <button
                 onClick={prevMonth}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-white/60 hover:text-white hover:bg-white/10 cursor-pointer border-none bg-transparent transition-colors text-lg"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-white/60 hover:text-white hover:bg-[#1a1a1a]/10 cursor-pointer border-none bg-transparent transition-colors text-lg"
               >
                 {'\u2039'}
               </button>
@@ -122,7 +122,7 @@ export function CalendarPage() {
               </h2>
               <button
                 onClick={nextMonth}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-white/60 hover:text-white hover:bg-white/10 cursor-pointer border-none bg-transparent transition-colors text-lg"
+                className="w-8 h-8 flex items-center justify-center rounded-lg text-white/60 hover:text-white hover:bg-[#1a1a1a]/10 cursor-pointer border-none bg-transparent transition-colors text-lg"
               >
                 {'\u203A'}
               </button>
@@ -157,8 +157,8 @@ export function CalendarPage() {
                       isToday
                         ? 'bg-primary text-white font-bold'
                         : isSelected
-                          ? 'bg-white/15 text-white font-medium'
-                          : 'bg-transparent text-white/70 hover:bg-white/10 hover:text-white'
+                          ? 'bg-[#1a1a1a]/15 text-white font-medium'
+                          : 'bg-transparent text-white/70 hover:bg-[#1a1a1a]/10 hover:text-white'
                     }`}
                   >
                     {day}
@@ -172,7 +172,7 @@ export function CalendarPage() {
           </div>
 
           {/* Legend */}
-          <div className="bg-white rounded-xl border border-border p-4">
+          <div className="bg-[#1a1a1a] rounded-xl border border-border p-4">
             <div className="grid grid-cols-2 gap-3">
               {Object.entries(EVENT_TYPES).map(([key, style]) => (
                 <div key={key} className="flex items-center gap-2">
@@ -187,7 +187,7 @@ export function CalendarPage() {
         {/* Right panel — Events */}
         <div className="space-y-6">
           {/* Selected date events */}
-          <div className="bg-white rounded-xl border border-border">
+          <div className="bg-[#1a1a1a] rounded-xl border border-border">
             <div className="px-5 py-4 border-b border-border flex items-center justify-between">
               <h3 className="font-semibold text-dark">
                 {selectedDate === todayKey
@@ -231,7 +231,7 @@ export function CalendarPage() {
           </div>
 
           {/* Upcoming */}
-          <div className="bg-white rounded-xl border border-border">
+          <div className="bg-[#1a1a1a] rounded-xl border border-border">
             <div className="px-5 py-4 border-b border-border">
               <h3 className="font-semibold text-dark">Upcoming</h3>
             </div>
