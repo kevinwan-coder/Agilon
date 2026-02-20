@@ -81,9 +81,9 @@ export function Step1BusinessInfo() {
         <label className="block font-semibold text-sm text-dark mb-1.5">
           Company Size <span className="text-red">*</span>
         </label>
-        <div className={`flex justify-center gap-[35px] ${errors.size ? 'border-2 border-red rounded-lg p-0.5' : ''}`}>
+        <div className={`flex justify-center gap-[60px] px-8 ${errors.size ? 'border-2 border-red rounded-lg p-0.5' : ''}`}>
           {SIZES.map((s) => (
-            <div key={s.value} className="w-[70%] max-w-[170px]">
+            <div key={s.value} className="w-[300px] flex-shrink-0">
               <RadioCard
                 icon={s.icon}
                 label={s.label}

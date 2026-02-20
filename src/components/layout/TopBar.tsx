@@ -1,6 +1,6 @@
 export function TopBar() {
   return (
-    <nav className="bg-[#1a1a1a] border-b border-border px-8 py-3 flex items-center justify-between">
+    <nav className="bg-[#0a0a0a] px-8 py-3 flex items-center justify-between">
       {/* Logo */}
       <div className="text-xl font-bold">
         <span className="text-[#2dca72]">A</span>

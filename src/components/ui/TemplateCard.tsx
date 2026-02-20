@@ -21,7 +21,7 @@ export function TemplateCard({ name, description, sidebar, topbar, accent, bg, c
       }`}
     >
       {/* Dashboard preview */}
-      <div className="h-[96px] flex overflow-hidden">
+      <div className="h-[120px] flex overflow-hidden">
         {/* Sidebar */}
         <div className="w-[28%] flex flex-col items-center pt-3 gap-2" style={{ backgroundColor: sidebar }}>
           <div className="w-5 h-5 rounded" style={{ backgroundColor: accent }} />

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useSetupStore } from '../../store/useSetupStore';
 import { brandingSchema } from '../../schemas/branding';
 import { TEMPLATES } from '../../constants/templates';
@@ -14,6 +14,13 @@ export function Step2Branding() {
   const { branding, updateBranding, setStep, setProvisioning } = useSetupStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [toast, setToast] = useState('');
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollTemplates = (dir: 'left' | 'right') => {
+    if (!scrollRef.current) return;
+    const amount = 245; // card width + gap
+    scrollRef.current.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+  };
 
   const handleNext = useCallback(() => {
     const result = brandingSchema.safeParse({
@@ -48,28 +55,52 @@ export function Step2Branding() {
         <label className="block font-semibold text-sm text-dark mb-1.5">
           Choose a Template <span className="text-red">*</span>
         </label>
-        <div className={`overflow-x-auto pb-2 rounded-lg ${errors.template ? 'border-2 border-red p-0.5' : ''}`}>
-          <div className="flex gap-8 px-8" style={{ minWidth: 'max-content' }}>
-            {TEMPLATES.map((t) => (
-              <div key={t.id} className="w-[180px] flex-shrink-0">
-                <TemplateCard
-                  name={t.name}
-                  description={t.description}
-                  sidebar={t.sidebar}
-                  topbar={t.topbar}
-                  accent={t.accent}
-                  bg={t.bg}
-                  cardBg={t.cardBg}
-                  textLight={t.textLight}
-                  selected={branding.template === t.id}
-                  onClick={() => {
-                    updateBranding({ template: t.id as TemplateName });
-                    if (errors.template) setErrors((p) => ({ ...p, template: '' }));
-                  }}
-                />
-              </div>
-            ))}
+        <div className={`relative flex items-center gap-2 rounded-lg ${errors.template ? 'border-2 border-red p-0.5' : ''}`}>
+          {/* Left arrow */}
+          <button
+            type="button"
+            onClick={() => scrollTemplates('left')}
+            className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#252525] border border-border text-gray hover:text-dark hover:border-[#7ee8a8] cursor-pointer transition-colors"
+          >
+            ‹
+          </button>
+
+          {/* Template cards */}
+          <div
+            ref={scrollRef}
+            className="flex-1 overflow-hidden"
+          >
+            <div className="flex gap-[20px]" style={{ minWidth: 'max-content' }}>
+              {TEMPLATES.map((t) => (
+                <div key={t.id} className="w-[225px] flex-shrink-0">
+                  <TemplateCard
+                    name={t.name}
+                    description={t.description}
+                    sidebar={t.sidebar}
+                    topbar={t.topbar}
+                    accent={t.accent}
+                    bg={t.bg}
+                    cardBg={t.cardBg}
+                    textLight={t.textLight}
+                    selected={branding.template === t.id}
+                    onClick={() => {
+                      updateBranding({ template: t.id as TemplateName });
+                      if (errors.template) setErrors((p) => ({ ...p, template: '' }));
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* Right arrow */}
+          <button
+            type="button"
+            onClick={() => scrollTemplates('right')}
+            className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#252525] border border-border text-gray hover:text-dark hover:border-[#7ee8a8] cursor-pointer transition-colors"
+          >
+            ›
+          </button>
         </div>
         {errors.template && <p className="text-red text-xs mt-1">{errors.template}</p>}
       </div>
