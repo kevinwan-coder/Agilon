@@ -10,7 +10,7 @@ export function ProgressBar() {
   const fillPercent = { 1: '0%', 2: '100%' }[currentStep] || '0%';
 
   return (
-    <div className="max-w-[1260px] mx-auto mt-6 px-5">
+    <div className="max-w-[1080px] mx-auto mt-6 px-5">
       <div className="flex justify-between relative">
         {/* Track */}
         <div className="absolute top-[18px] left-[40px] right-[40px] h-[3px] bg-border z-0" />

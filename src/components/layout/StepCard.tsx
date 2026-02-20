@@ -7,7 +7,7 @@ interface StepCardProps {
 
 export function StepCard({ children }: StepCardProps) {
   return (
-    <div className="max-w-[1260px] mx-auto mt-5 mb-8 px-5">
+    <div className="max-w-[1080px] mx-auto mt-5 mb-8 px-5">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
