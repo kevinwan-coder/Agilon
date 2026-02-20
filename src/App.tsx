@@ -4,7 +4,6 @@ import { TopBar } from './components/layout/TopBar';
 import { Step1BusinessInfo } from './components/steps/Step1BusinessInfo';
 import { Step2Branding } from './components/steps/Step2Branding';
 import { Provisioning } from './components/steps/Provisioning';
-import { Success } from './components/steps/Success';
 import { Dashboard } from './components/dashboard/Dashboard';
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
       {currentStep === 1 && <Step1BusinessInfo />}
       {currentStep === 2 && <Step2Branding />}
       {currentStep === 3 && <Provisioning />}
-      {currentStep === 4 && <Success />}
     </div>
   );
 }
