@@ -19,7 +19,7 @@ export function ColorPicker({ selected, onSelect, error }: ColorPickerProps) {
             key={color}
             type="button"
             onClick={() => onSelect(color)}
-            className={`w-11 h-11 rounded-full cursor-pointer border-3 transition-all hover:scale-110 ${
+            className={`w-11 h-11 rounded-lg cursor-pointer border-3 transition-all hover:scale-110 ${
               selected === color
                 ? 'border-white shadow-[0_0_0_2px_#1a1a1a,0_0_0_4px_white]'
                 : 'border-transparent'

@@ -70,7 +70,7 @@ export function Step2Branding() {
             ref={scrollRef}
             className="flex-1 overflow-hidden"
           >
-            <div className="flex gap-[20px]" style={{ minWidth: 'max-content' }}>
+            <div className="flex gap-[30px]" style={{ minWidth: 'max-content' }}>
               {TEMPLATES.map((t) => (
                 <div key={t.id} className="w-[225px] flex-shrink-0">
                   <TemplateCard
@@ -105,19 +105,21 @@ export function Step2Branding() {
         {errors.template && <p className="text-red text-xs mt-1">{errors.template}</p>}
       </div>
 
-      <FileUpload
-        logoName={branding.logoName}
-        onFileSelect={(file) => updateBranding({ logoFile: file, logoName: file.name })}
-      />
+      <div className="grid grid-cols-2 gap-6">
+        <FileUpload
+          logoName={branding.logoName}
+          onFileSelect={(file) => updateBranding({ logoFile: file, logoName: file.name })}
+        />
 
-      <ColorPicker
-        selected={branding.color}
-        onSelect={(color) => {
-          updateBranding({ color });
-          if (errors.color) setErrors((p) => ({ ...p, color: '' }));
-        }}
-        error={errors.color}
-      />
+        <ColorPicker
+          selected={branding.color}
+          onSelect={(color) => {
+            updateBranding({ color });
+            if (errors.color) setErrors((p) => ({ ...p, color: '' }));
+          }}
+          error={errors.color}
+        />
+      </div>
 
       <div className="flex justify-between mt-6 pt-4 border-t border-border">
         <Button variant="secondary" onClick={() => setStep(1)}>&larr; Back</Button>
