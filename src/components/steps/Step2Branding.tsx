@@ -49,7 +49,7 @@ export function Step2Branding() {
           Choose a Template <span className="text-red">*</span>
         </label>
         <div className={`overflow-x-auto pb-2 rounded-lg ${errors.template ? 'border-2 border-red p-0.5' : ''}`}>
-          <div className="flex gap-8" style={{ minWidth: 'max-content' }}>
+          <div className="flex gap-8 px-8" style={{ minWidth: 'max-content' }}>
             {TEMPLATES.map((t) => (
               <div key={t.id} className="w-[180px] flex-shrink-0">
                 <TemplateCard
