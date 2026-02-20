@@ -34,7 +34,7 @@ const initialBranding: Branding = {
 };
 
 export const useSetupStore = create<SetupState>((set) => ({
-  currentStep: 1,
+  currentStep: 0,
   businessInfo: { ...initialBusinessInfo },
   branding: { ...initialBranding },
   skills: [],
@@ -65,7 +65,7 @@ export const useSetupStore = create<SetupState>((set) => ({
 
   reset: () =>
     set({
-      currentStep: 1,
+      currentStep: 0,
       businessInfo: { ...initialBusinessInfo },
       branding: { ...initialBranding },
       skills: [],
