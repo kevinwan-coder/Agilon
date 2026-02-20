@@ -126,7 +126,7 @@ export function Step1BusinessInfo() {
       </div>
 
       {/* AI Conversation Box */}
-      <div className="mt-3 pt-3 border-t border-border w-3/4">
+      <div className="mt-3 pt-3 border-t border-border w-3/4 mx-auto">
         <div className="relative flex items-center">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm opacity-70">{'\uD83E\uDD16'}</span>
           <input
