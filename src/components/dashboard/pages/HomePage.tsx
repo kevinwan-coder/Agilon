@@ -1,6 +1,5 @@
 import { useSetupStore } from '../../../store/useSetupStore';
-import { HomeJustMe } from './HomeJustMe';
-import { HomeSmallTeam } from './HomeSmallTeam';
+import { HomeLanding } from './HomeLanding';
 import { HomeEnterprise } from './HomeEnterprise';
 
 export function HomePage() {
@@ -8,13 +7,12 @@ export function HomePage() {
 
   switch (size) {
     case 'just-me':
-      return <HomeJustMe />;
     case '2-10':
-      return <HomeSmallTeam />;
+      return <HomeLanding />;
     case '11-50':
     case '50-plus':
       return <HomeEnterprise />;
     default:
-      return <HomeSmallTeam />;
+      return <HomeLanding />;
   }
 }
