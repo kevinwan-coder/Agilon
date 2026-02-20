@@ -8,7 +8,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function Input({ label, error, required, className = '', ...props }: InputProps) {
   return (
-    <div className="mb-5">
+    <div className="mb-4">
       <label className="block font-semibold text-sm text-dark mb-1.5">
         {label}
         {required && <span className="text-red ml-1">*</span>}

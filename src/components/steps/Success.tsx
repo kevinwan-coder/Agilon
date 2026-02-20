@@ -8,7 +8,7 @@ export function Success() {
 
   return (
     <StepCard>
-      <div className="text-center py-10 px-5">
+      <div className="text-center py-8 px-4">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}

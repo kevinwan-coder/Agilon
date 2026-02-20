@@ -10,7 +10,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 export function Select({ label, error, required, options, placeholder, className = '', ...props }: SelectProps) {
   return (
-    <div className="mb-5">
+    <div className="mb-4">
       <label className="block font-semibold text-sm text-dark mb-1.5">
         {label}
         {required && <span className="text-red ml-1">*</span>}

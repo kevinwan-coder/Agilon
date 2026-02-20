@@ -79,7 +79,7 @@ function CodeTerminal() {
   }, [lines]);
 
   return (
-    <div className="relative mx-auto mt-8 max-w-[540px] rounded-xl overflow-hidden"
+    <div className="relative mx-auto mt-6 max-w-[378px] rounded-xl overflow-hidden"
       style={{ boxShadow: '0 0 40px rgba(26, 86, 219, 0.15), 0 0 80px rgba(26, 86, 219, 0.05)' }}
     >
       {/* Terminal title bar */}
@@ -95,7 +95,7 @@ function CodeTerminal() {
       {/* Terminal content */}
       <div
         ref={containerRef}
-        className="h-[180px] overflow-hidden bg-[#0d1117] p-4 font-mono text-[11.5px] leading-[1.8]"
+        className="h-[144px] overflow-hidden bg-[#0d1117] p-3 font-mono text-[11px] leading-[1.7]"
       >
         <AnimatePresence>
           {lines.filter(Boolean).map((line, i) => {
@@ -222,7 +222,7 @@ export function Provisioning() {
   }, []);
 
   return (
-    <div className="max-w-[680px] mx-auto mt-8">
+    <div className="max-w-[476px] mx-auto mt-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -230,7 +230,7 @@ export function Provisioning() {
       >
         <Particles />
 
-        <div className="relative text-center pt-12 pb-4 px-8">
+        <div className="relative text-center pt-8 pb-3 px-6">
           <ProgressRing progress={progress} />
 
           <motion.h2
@@ -244,7 +244,7 @@ export function Provisioning() {
           <p className="text-gray mt-2 mb-8">Hang tight while we configure everything for you.</p>
 
           {/* Steps with icons */}
-          <div className="max-w-[380px] mx-auto text-left">
+          <div className="max-w-[266px] mx-auto text-left">
             {PROV_STEPS.map((step, i) => {
               const isDone = i < activeStep;
               const isActive = i === activeStep;

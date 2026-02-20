@@ -42,16 +42,16 @@ export function Step2Branding() {
       <Toast message={toast} visible={!!toast} onClose={() => setToast('')} />
 
       <h2 className="text-2xl font-bold text-dark mb-1.5">Set up your brand</h2>
-      <p className="text-gray text-[0.95rem] mb-7">Customize how your Agilon workspace looks and feels.</p>
+      <p className="text-gray text-[0.95rem] mb-5">Customize how your Agilon workspace looks and feels.</p>
 
-      <div className="mb-5">
+      <div className="mb-4">
         <label className="block font-semibold text-sm text-dark mb-1.5">
           Choose a Template <span className="text-red">*</span>
         </label>
         <div className={`overflow-x-auto pb-2 rounded-lg ${errors.template ? 'border-2 border-red p-0.5' : ''}`}>
-          <div className="flex gap-3.5" style={{ minWidth: 'max-content' }}>
+          <div className="flex gap-2.5" style={{ minWidth: 'max-content' }}>
             {TEMPLATES.map((t) => (
-              <div key={t.id} className="w-[180px] flex-shrink-0">
+              <div key={t.id} className="w-[140px] flex-shrink-0">
                 <TemplateCard
                   name={t.name}
                   description={t.description}
@@ -88,7 +88,7 @@ export function Step2Branding() {
         error={errors.color}
       />
 
-      <div className="flex justify-between mt-8 pt-6 border-t border-border">
+      <div className="flex justify-between mt-6 pt-4 border-t border-border">
         <Button variant="secondary" onClick={() => setStep(1)}>&larr; Back</Button>
         <Button onClick={handleNext}>Continue &rarr;</Button>
       </div>

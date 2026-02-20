@@ -46,7 +46,7 @@ export function Step1BusinessInfo() {
       <Toast message={toast} visible={!!toast} onClose={() => setToast('')} />
 
       <h2 className="text-2xl font-bold text-dark mb-1.5">Tell us about your business</h2>
-      <p className="text-gray text-[0.95rem] mb-7">We'll use this to customize your Agilon experience.</p>
+      <p className="text-gray text-[0.95rem] mb-5">We'll use this to customize your Agilon experience.</p>
 
       <Input
         label="Business Name"
@@ -87,7 +87,7 @@ export function Step1BusinessInfo() {
         />
       </div>
 
-      <div className="mb-5">
+      <div className="mb-4">
         <label className="block font-semibold text-sm text-dark mb-1.5">
           Company Size <span className="text-red">*</span>
         </label>
@@ -109,24 +109,24 @@ export function Step1BusinessInfo() {
         {errors.size && <p className="text-red text-xs mt-1">{errors.size}</p>}
       </div>
 
-      <div className="mb-5">
+      <div className="mb-4">
         <label className="block font-semibold text-sm text-dark mb-1.5">
           Brief Description <span className="text-gray-light font-normal">(optional)</span>
         </label>
         <textarea
-          className="w-full px-3.5 py-2.5 border-[1.5px] border-border rounded-lg text-[0.95rem] text-dark bg-[#252525] placeholder:text-gray-light resize-y min-h-[80px] focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(26,86,219,0.15)]"
+          className="w-full px-3.5 py-2.5 border-[1.5px] border-border rounded-lg text-[0.95rem] text-dark bg-[#252525] placeholder:text-gray-light resize-y min-h-[64px] focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(26,86,219,0.15)]"
           placeholder="Tell us a bit about what your business does..."
           value={businessInfo.description}
           onChange={(e) => updateBusinessInfo({ description: e.target.value })}
         />
       </div>
 
-      <div className="flex justify-end mt-8 pt-6 border-t border-border">
+      <div className="flex justify-end mt-6 pt-4 border-t border-border">
         <Button onClick={handleNext}>Continue &rarr;</Button>
       </div>
 
       {/* AI Conversation Box */}
-      <div className="mt-6 pt-5 border-t border-border">
+      <div className="mt-4 pt-4 border-t border-border">
         <div className="relative flex items-center">
           <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg opacity-70">{'\uD83E\uDD16'}</span>
           <input

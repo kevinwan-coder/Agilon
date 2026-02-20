@@ -8,7 +8,7 @@ interface ColorPickerProps {
 
 export function ColorPicker({ selected, onSelect, error }: ColorPickerProps) {
   return (
-    <div className="mb-5">
+    <div className="mb-4">
       <label className="block font-semibold text-sm text-dark mb-1.5">
         Brand Color <span className="text-red">*</span>
       </label>

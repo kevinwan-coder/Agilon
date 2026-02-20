@@ -21,7 +21,7 @@ export function TemplateCard({ name, description, sidebar, topbar, accent, bg, c
       }`}
     >
       {/* Dashboard preview */}
-      <div className="h-[120px] flex overflow-hidden">
+      <div className="h-[96px] flex overflow-hidden">
         {/* Sidebar */}
         <div className="w-[28%] flex flex-col items-center pt-3 gap-2" style={{ backgroundColor: sidebar }}>
           <div className="w-5 h-5 rounded" style={{ backgroundColor: accent }} />
@@ -66,7 +66,7 @@ export function TemplateCard({ name, description, sidebar, topbar, accent, bg, c
       </div>
 
       {/* Label */}
-      <div className="px-3.5 py-2.5 border-t border-border">
+      <div className="px-2.5 py-2 border-t border-border">
         <div className="font-semibold text-sm text-dark">{name}</div>
         <div className="text-xs text-gray">{description}</div>
       </div>

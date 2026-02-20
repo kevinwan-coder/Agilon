@@ -14,12 +14,12 @@ export function FileUpload({ logoName, onFileSelect }: FileUploadProps) {
   };
 
   return (
-    <div className="mb-5">
+    <div className="mb-4">
       <label className="block font-semibold text-sm text-dark mb-1.5">Upload Your Logo</label>
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className="w-full border-2 border-dashed border-border rounded-xl p-8 text-center cursor-pointer transition-all bg-light hover:border-primary hover:bg-primary-light"
+        className="w-full border-2 border-dashed border-border rounded-xl p-5 text-center cursor-pointer transition-all bg-light hover:border-primary hover:bg-primary-light"
       >
         <div className="text-2xl text-gray-light">{'\uD83D\uDCE4'}</div>
         <div className="text-sm text-gray mt-2">
