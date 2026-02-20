@@ -1,6 +1,72 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useSetupStore } from '../../store/useSetupStore';
+
+const CODE_LINES = [
+  'import { createModule } from "@agilon/core";',
+  'const dashboard = await buildDashboard(config);',
+  'export default defineWorkspace({ modules, plugins });',
+  'await db.migrate({ schema: "workspace_v2" });',
+  'const api = new AgilonAPI({ key: process.env.KEY });',
+  'function initializeModules(workspace: Workspace) {',
+  '  return modules.map(m => m.initialize());',
+  'const router = createRouter({ routes, middleware });',
+  'await storage.provision({ region: "us-east-1" });',
+  'export const config = { theme, branding, modules };',
+  'class WorkspaceBuilder extends BaseBuilder {',
+  '  async compile() { return this.bundle(); }',
+  'const plugins = await loadPlugins(manifest);',
+  'await setupAuthentication({ provider: "oauth2" });',
+  'const metrics = new MetricsCollector(workspace);',
+  'function registerHandlers(app: Application) {',
+  '  app.use(cors()); app.use(logger());',
+  'await cache.warm({ keys: preloadKeys });',
+  'const scheduler = new TaskScheduler(config);',
+  'export { Dashboard, Sidebar, TopBar } from "./ui";',
+];
+
+function CodeFlash() {
+  const [lines, setLines] = useState<{ id: number; text: string; x: number; y: number }[]>([]);
+
+  const shuffled = useMemo(() => [...CODE_LINES].sort(() => Math.random() - 0.5), []);
+
+  useEffect(() => {
+    let id = 0;
+    let cancelled = false;
+
+    function addLine() {
+      if (cancelled) return;
+      const text = shuffled[id % shuffled.length];
+      const x = Math.random() * 60 + 5;  // 5-65% from left
+      const y = Math.random() * 80 + 5;  // 5-85% from top
+      setLines(prev => [...prev.slice(-6), { id: id++, text, x, y }]);
+      setTimeout(addLine, 400 + Math.random() * 300);
+    }
+
+    const timer = setTimeout(addLine, 300);
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [shuffled]);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <AnimatePresence>
+        {lines.map((line) => (
+          <motion.div
+            key={line.id}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 0.12, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, exit: { duration: 0.8 } }}
+            className="absolute font-mono text-[11px] text-[#2dca72] whitespace-nowrap"
+            style={{ left: `${line.x}%`, top: `${line.y}%` }}
+          >
+            {line.text}
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 const PROV_STEPS = [
   { label: 'Building Up Modules', icon: 'modules' },
@@ -115,6 +181,9 @@ export function Provisioning() {
         animate={{ opacity: 1, y: 0 }}
         className="relative bg-[#1a1a1a] rounded-2xl shadow-[0_4px_40px_rgba(0,0,0,0.3)] border border-border overflow-hidden"
       >
+        {/* Flashing code lines background */}
+        <CodeFlash />
+
         <div className="relative text-center pt-12 pb-10 px-6">
           {/* Orbiting icon */}
           <OrbitingIcon />
