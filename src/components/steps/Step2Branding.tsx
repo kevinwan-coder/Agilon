@@ -106,11 +106,6 @@ export function Step2Branding() {
       </div>
 
       <div className="grid grid-cols-2 gap-6">
-        <FileUpload
-          logoName={branding.logoName}
-          onFileSelect={(file) => updateBranding({ logoFile: file, logoName: file.name })}
-        />
-
         <ColorPicker
           selected={branding.color}
           onSelect={(color) => {
@@ -118,6 +113,11 @@ export function Step2Branding() {
             if (errors.color) setErrors((p) => ({ ...p, color: '' }));
           }}
           error={errors.color}
+        />
+
+        <FileUpload
+          logoName={branding.logoName}
+          onFileSelect={(file) => updateBranding({ logoFile: file, logoName: file.name })}
         />
       </div>
 
