@@ -126,13 +126,13 @@ export function Step1BusinessInfo() {
       </div>
 
       {/* AI Conversation Box */}
-      <div className="mt-4 pt-4 border-t border-border">
+      <div className="mt-3 pt-3 border-t border-border w-3/4">
         <div className="relative flex items-center">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg opacity-70">{'\uD83E\uDD16'}</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm opacity-70">{'\uD83E\uDD16'}</span>
           <input
             type="text"
             placeholder="If you are not sure about your company type, ask me"
-            className="w-full pl-12 pr-4 py-3 bg-[#252525] border border-border rounded-xl text-sm text-dark placeholder:text-gray-light focus:outline-none focus:border-[#7ee8a8] focus:bg-[#2a2a2a] focus:shadow-[0_0_0_3px_rgba(126,232,168,0.15)] transition-all"
+            className="w-full pl-9 pr-3 py-2 bg-[#252525] border border-border rounded-lg text-xs text-dark placeholder:text-gray-light focus:outline-none focus:border-[#7ee8a8] focus:bg-[#2a2a2a] focus:shadow-[0_0_0_3px_rgba(126,232,168,0.15)] transition-all"
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();
