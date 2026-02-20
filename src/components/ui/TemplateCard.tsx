@@ -17,7 +17,7 @@ export function TemplateCard({ name, description, sidebar, topbar, accent, bg, c
       type="button"
       onClick={onClick}
       className={`border-2 rounded-xl overflow-hidden cursor-pointer transition-all text-left ${
-        selected ? 'border-[#2dca72] shadow-[0_0_0_2px_rgba(45,202,114,0.2)]' : 'border-border hover:border-[#2dca72]'
+        selected ? 'border-[#7ee8a8] shadow-[0_0_0_2px_rgba(126,232,168,0.2)]' : 'border-border hover:border-[#7ee8a8]'
       }`}
     >
       {/* Dashboard preview */}

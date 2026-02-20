@@ -114,7 +114,7 @@ export function Step1BusinessInfo() {
           Brief Description <span className="text-gray-light font-normal">(optional)</span>
         </label>
         <textarea
-          className="w-full px-3.5 py-2.5 border-[1.5px] border-border rounded-lg text-[0.95rem] text-dark bg-[#252525] placeholder:text-gray-light resize-y min-h-[64px] focus:outline-none focus:border-[#2dca72] focus:shadow-[0_0_0_3px_rgba(45,202,114,0.15)]"
+          className="w-full px-3.5 py-2.5 border-[1.5px] border-border rounded-lg text-[0.95rem] text-dark bg-[#252525] placeholder:text-gray-light resize-y min-h-[64px] focus:outline-none focus:border-[#7ee8a8] focus:shadow-[0_0_0_3px_rgba(126,232,168,0.15)]"
           placeholder="Tell us a bit about what your business does..."
           value={businessInfo.description}
           onChange={(e) => updateBusinessInfo({ description: e.target.value })}
@@ -132,7 +132,7 @@ export function Step1BusinessInfo() {
           <input
             type="text"
             placeholder="If you are not sure about your company type, ask me"
-            className="w-full pl-12 pr-4 py-3 bg-[#252525] border border-border rounded-xl text-sm text-dark placeholder:text-gray-light focus:outline-none focus:border-[#2dca72] focus:bg-[#2a2a2a] focus:shadow-[0_0_0_3px_rgba(45,202,114,0.15)] transition-all"
+            className="w-full pl-12 pr-4 py-3 bg-[#252525] border border-border rounded-xl text-sm text-dark placeholder:text-gray-light focus:outline-none focus:border-[#7ee8a8] focus:bg-[#2a2a2a] focus:shadow-[0_0_0_3px_rgba(126,232,168,0.15)] transition-all"
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();

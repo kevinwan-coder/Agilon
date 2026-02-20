@@ -12,7 +12,7 @@ export function RadioCard({ icon, label, description, selected, onClick }: Radio
       type="button"
       onClick={onClick}
       className={`border-2 rounded-lg p-2.5 text-center cursor-pointer transition-all bg-[#252525] ${
-        selected ? 'border-[#2dca72] bg-[#1a2e22]' : 'border-border hover:border-[#2dca72] hover:bg-[#1a2e22]'
+        selected ? 'border-[#7ee8a8] bg-[#1a2e22]' : 'border-border hover:border-[#7ee8a8] hover:bg-[#1a2e22]'
       }`}
     >
       <div className="text-[1.2rem] mb-1">{icon}</div>

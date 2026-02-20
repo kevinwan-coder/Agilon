@@ -19,7 +19,7 @@ export function FileUpload({ logoName, onFileSelect }: FileUploadProps) {
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className="w-full border-2 border-dashed border-border rounded-xl p-5 text-center cursor-pointer transition-all bg-light hover:border-primary hover:bg-primary-light"
+        className="w-full border-2 border-dashed border-border rounded-xl p-5 text-center cursor-pointer transition-all bg-light hover:border-[#7ee8a8] hover:bg-[#1a2e22]"
       >
         <div className="text-2xl text-gray-light">{'\uD83D\uDCE4'}</div>
         <div className="text-sm text-gray mt-2">

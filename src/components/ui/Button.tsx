@@ -9,7 +9,7 @@ const variants = {
   primary:
     'bg-[#2dca72] text-white hover:bg-[#25a85f]',
   secondary:
-    'bg-[#252525] text-gray border border-border hover:border-[#2dca72] hover:text-[#2dca72]',
+    'bg-[#252525] text-gray border border-border hover:border-[#7ee8a8] hover:text-[#7ee8a8]',
   success:
     'bg-green text-white hover:bg-green-700 text-lg px-9 py-3.5',
 };
