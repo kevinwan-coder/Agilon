@@ -7,8 +7,7 @@ interface DashboardTopBarProps {
 }
 
 const NAV_ITEMS = [
-  { id: 'home', label: 'Home', icon: '🏠' },
-  { id: 'skills', label: 'Skills', icon: '⚙️' },
+  { id: 'home', label: 'Dashboard', icon: '🏠' },
   { id: 'workflows', label: 'Workflows', icon: '🔄' },
   { id: 'calendar', label: 'Calendar', icon: '📅' },
   { id: 'storage', label: 'Storage', icon: '📁' },
@@ -27,9 +26,8 @@ export function DashboardTopBar({ activePage, onNavigate }: DashboardTopBarProps
       {/* Logo + Business Name */}
       <div className="flex items-center gap-3 flex-shrink-0 mr-2">
         <div className="text-lg font-bold" style={{ color: branding.color || '#1a56db' }}>
-          Agilon
+          {businessInfo.name || 'My Business'}
         </div>
-        <span className="text-xs text-gray truncate max-w-[100px]">{businessInfo.name || 'My Business'}</span>
       </div>
 
       {/* Nav Items */}
