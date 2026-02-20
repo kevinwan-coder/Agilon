@@ -12,7 +12,19 @@ export type TemplateName =
   | 'nature'
   | 'tech'
   | 'warm'
-  | 'ocean';
+  | 'ocean'
+  | 'midnight'
+  | 'sunset'
+  | 'forest'
+  | 'royal'
+  | 'pastel'
+  | 'neon'
+  | 'slate'
+  | 'ruby'
+  | 'arctic'
+  | 'sand'
+  | 'lavender'
+  | 'carbon';
 
 export type SkillId = 'accounting' | 'hr' | 'tax' | 'scheduling' | 'vdr' | 'it' | 'legal';
 
