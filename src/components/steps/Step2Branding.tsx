@@ -70,7 +70,7 @@ export function Step2Branding() {
             ref={scrollRef}
             className="flex-1 overflow-hidden"
           >
-            <div className="flex gap-[30px]" style={{ minWidth: 'max-content' }}>
+            <div className="flex gap-[15px]" style={{ minWidth: 'max-content' }}>
               {TEMPLATES.map((t) => (
                 <div key={t.id} className="w-[225px] flex-shrink-0">
                   <TemplateCard
