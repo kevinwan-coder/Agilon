@@ -19,7 +19,7 @@ export function Success() {
         </motion.div>
 
         <h2 className="text-2xl font-bold text-dark mb-2">Your Agilon is ready!</h2>
-        <p className="text-gray max-w-[400px] mx-auto">
+        <p className="text-gray max-w-[700px] mx-auto">
           Your workspace has been set up and ready to go.
         </p>
 

@@ -79,7 +79,7 @@ function CodeTerminal() {
   }, [lines]);
 
   return (
-    <div className="relative mx-auto mt-6 max-w-[378px] rounded-xl overflow-hidden"
+    <div className="relative mx-auto mt-6 max-w-[945px] rounded-xl overflow-hidden"
       style={{ boxShadow: '0 0 40px rgba(26, 86, 219, 0.15), 0 0 80px rgba(26, 86, 219, 0.05)' }}
     >
       {/* Terminal title bar */}
@@ -222,7 +222,7 @@ export function Provisioning() {
   }, []);
 
   return (
-    <div className="max-w-[476px] mx-auto mt-6">
+    <div className="max-w-[1190px] mx-auto mt-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -244,7 +244,7 @@ export function Provisioning() {
           <p className="text-gray mt-2 mb-8">Hang tight while we configure everything for you.</p>
 
           {/* Steps with icons */}
-          <div className="max-w-[266px] mx-auto text-left">
+          <div className="max-w-[665px] mx-auto text-left">
             {PROV_STEPS.map((step, i) => {
               const isDone = i < activeStep;
               const isActive = i === activeStep;

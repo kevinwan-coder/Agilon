@@ -51,7 +51,7 @@ export function Step2Branding() {
         <div className={`overflow-x-auto pb-2 rounded-lg ${errors.template ? 'border-2 border-red p-0.5' : ''}`}>
           <div className="flex gap-2.5" style={{ minWidth: 'max-content' }}>
             {TEMPLATES.map((t) => (
-              <div key={t.id} className="w-[140px] flex-shrink-0">
+              <div key={t.id} className="w-[315px] flex-shrink-0">
                 <TemplateCard
                   name={t.name}
                   description={t.description}
