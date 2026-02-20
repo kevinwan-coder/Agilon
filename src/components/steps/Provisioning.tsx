@@ -55,8 +55,8 @@ function CodeFlash() {
             key={line.id}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 0.12, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, exit: { duration: 0.8 } }}
+            exit={{ opacity: 0, transition: { duration: 0.8 } }}
+            transition={{ duration: 0.4 }}
             className="absolute font-mono text-[11px] text-[#2dca72] whitespace-nowrap"
             style={{ left: `${line.x}%`, top: `${line.y}%` }}
           >
