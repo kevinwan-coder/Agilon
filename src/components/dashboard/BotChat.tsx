@@ -45,17 +45,17 @@ export function BotChat({ open, onClose }: BotChatProps) {
     <AnimatePresence>
       {open && (
         <motion.div
-          initial={{ width: 0, opacity: 0 }}
-          animate={{ width: 380, opacity: 1 }}
-          exit={{ width: 0, opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="h-full bg-[#1a1a1a] border-l border-border flex flex-col overflow-hidden flex-shrink-0"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 20 }}
+          transition={{ duration: 0.2 }}
+          className="absolute top-0 right-0 w-[380px] h-full bg-[#1a1a1a] border-l border-border flex flex-col z-50 shadow-[-4px_0_30px_rgba(0,0,0,0.4)]"
         >
           {/* Header */}
           <div className="p-4 border-b border-border flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-full bg-primary-light flex items-center justify-center text-lg">
-                {'\uD83E\uDD16'}
+                🤖
               </div>
               <div>
                 <div className="text-sm font-semibold text-dark">Agilon Bot</div>
@@ -69,7 +69,7 @@ export function BotChat({ open, onClose }: BotChatProps) {
               onClick={onClose}
               className="bg-transparent border-none text-gray hover:text-dark cursor-pointer text-lg p-1"
             >
-              {'\u2715'}
+              ✕
             </button>
           </div>
 
@@ -122,7 +122,7 @@ export function BotChat({ open, onClose }: BotChatProps) {
               onClick={handleSend}
               className="px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-medium cursor-pointer border-none hover:bg-primary-hover transition-colors"
             >
-              {'\u2191'}
+              ↑
             </button>
           </div>
         </motion.div>
@@ -146,7 +146,7 @@ function getBotResponse(input: string): string {
     return 'Your Q1 tax estimates are due April 15th. Based on your current income, I estimate approximately $2,400 in quarterly taxes. Want me to prepare the filing?';
   }
   if (lower.includes('help') || lower.includes('what can')) {
-    return 'I can help you with:\n\u2022 Accounting \u2014 invoices, expenses, reports\n\u2022 Scheduling \u2014 meetings, appointments\n\u2022 Tax \u2014 estimates, filing\n\u2022 HR \u2014 payroll, employee records\n\u2022 And much more! Just ask.';
+    return 'I can help you with:\n• Accounting — invoices, expenses, reports\n• Scheduling — meetings, appointments\n• Tax — estimates, filing\n• HR — payroll, employee records\n• And much more! Just ask.';
   }
   return `I understand you need help with "${input}". Let me look into that for you. In the full version, I'll connect to your data and provide a detailed response. Is there anything specific you'd like to know?`;
 }

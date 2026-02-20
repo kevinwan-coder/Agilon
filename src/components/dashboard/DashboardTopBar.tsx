@@ -1,13 +1,80 @@
 import { useSetupStore } from '../../store/useSetupStore';
+import { SKILLS } from '../../constants/skills';
 
-export function DashboardTopBar() {
+interface DashboardTopBarProps {
+  activePage: string;
+  onNavigate: (page: string) => void;
+}
+
+const NAV_ITEMS = [
+  { id: 'home', label: 'Home', icon: '🏠' },
+  { id: 'skills', label: 'Skills', icon: '⚙️' },
+  { id: 'workflows', label: 'Workflows', icon: '🔄' },
+  { id: 'calendar', label: 'Calendar', icon: '📅' },
+  { id: 'storage', label: 'Storage', icon: '📁' },
+  { id: 'settings', label: 'Settings', icon: '⚙️' },
+];
+
+export function DashboardTopBar({ activePage, onNavigate }: DashboardTopBarProps) {
   const businessInfo = useSetupStore((s) => s.businessInfo);
+  const branding = useSetupStore((s) => s.branding);
+  const skills = useSetupStore((s) => s.skills);
+
+  const activeSkills = SKILLS.filter((s) => skills.includes(s.id));
 
   return (
-    <div className="h-[60px] bg-[#1a1a1a] border-b border-border flex items-center justify-end px-6 flex-shrink-0">
-      <div className="flex items-center gap-3">
+    <div className="bg-[#1a1a1a] border-b border-border px-6 flex items-center gap-6 flex-shrink-0 h-[56px]">
+      {/* Logo + Business Name */}
+      <div className="flex items-center gap-3 flex-shrink-0 mr-2">
+        <div className="text-lg font-bold" style={{ color: branding.color || '#1a56db' }}>
+          Agilon
+        </div>
+        <span className="text-xs text-gray truncate max-w-[100px]">{businessInfo.name || 'My Business'}</span>
+      </div>
+
+      {/* Nav Items */}
+      <nav className="flex items-center gap-1 flex-1 overflow-x-auto">
+        {NAV_ITEMS.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => onNavigate(item.id)}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm whitespace-nowrap transition-colors border-none cursor-pointer ${
+              activePage === item.id
+                ? 'bg-primary-light text-primary font-semibold'
+                : 'bg-transparent text-gray hover:bg-[#252525] hover:text-dark'
+            }`}
+          >
+            <span className="text-sm">{item.icon}</span>
+            {item.label}
+          </button>
+        ))}
+
+        {/* Active Skills */}
+        {activeSkills.length > 0 && (
+          <>
+            <div className="w-px h-5 bg-border mx-1 flex-shrink-0" />
+            {activeSkills.map((skill) => (
+              <button
+                key={skill.id}
+                onClick={() => onNavigate(`skill-${skill.id}`)}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm whitespace-nowrap transition-colors border-none cursor-pointer ${
+                  activePage === `skill-${skill.id}`
+                    ? 'bg-primary-light text-primary font-semibold'
+                    : 'bg-transparent text-gray hover:bg-[#252525] hover:text-dark'
+                }`}
+              >
+                <span className="text-sm">{skill.icon}</span>
+                {skill.name}
+              </button>
+            ))}
+          </>
+        )}
+      </nav>
+
+      {/* Right — Notification + Avatar */}
+      <div className="flex items-center gap-3 flex-shrink-0">
         <button className="relative p-2 bg-transparent border-none cursor-pointer text-gray hover:text-dark transition-colors text-lg">
-          {'\uD83D\uDD14'}
+          🔔
           <span className="absolute top-1 right-1 w-2 h-2 bg-red rounded-full" />
         </button>
         <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold cursor-pointer">
