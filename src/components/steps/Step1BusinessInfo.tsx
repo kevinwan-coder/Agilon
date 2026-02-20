@@ -13,7 +13,8 @@ import type { CompanySize } from '../../types/setup';
 
 const SIZES: { value: CompanySize; icon: string; label: string; desc: string }[] = [
   { value: 'just-me', icon: '\uD83D\uDC64', label: 'Just Me', desc: 'Sole proprietor' },
-  { value: '2-50', icon: '\uD83D\uDC65', label: '2\u201350', desc: 'Small to mid team' },
+  { value: '2-10', icon: '\uD83D\uDC65', label: '2\u201310', desc: 'Small team' },
+  { value: '11-50', icon: '\uD83D\uDC65', label: '11\u201350', desc: 'Mid-size team' },
   { value: '50-plus', icon: '\uD83C\uDFE2', label: 'Over 50', desc: 'Large organization' },
 ];
 
@@ -90,7 +91,7 @@ export function Step1BusinessInfo() {
         <label className="block font-semibold text-sm text-dark mb-1.5">
           Company Size <span className="text-red">*</span>
         </label>
-        <div className={`grid grid-cols-3 gap-3 ${errors.size ? 'border-2 border-red rounded-lg p-0.5' : ''}`}>
+        <div className={`grid grid-cols-4 gap-2 ${errors.size ? 'border-2 border-red rounded-lg p-0.5' : ''}`}>
           {SIZES.map((s) => (
             <RadioCard
               key={s.value}
