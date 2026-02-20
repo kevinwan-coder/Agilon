@@ -63,27 +63,17 @@ export function Step1BusinessInfo() {
       <div className="grid grid-cols-2 gap-4">
         <Select
           label="Type of Company"
-          required
           options={[...INDUSTRIES]}
           placeholder="Select type..."
           value={businessInfo.industry}
-          onChange={(e) => {
-            updateBusinessInfo({ industry: e.target.value });
-            if (errors.industry) setErrors((p) => ({ ...p, industry: '' }));
-          }}
-          error={errors.industry}
+          onChange={(e) => updateBusinessInfo({ industry: e.target.value })}
         />
         <Select
           label="State"
-          required
           options={[...US_STATES]}
           placeholder="Select state..."
           value={businessInfo.state}
-          onChange={(e) => {
-            updateBusinessInfo({ state: e.target.value });
-            if (errors.state) setErrors((p) => ({ ...p, state: '' }));
-          }}
-          error={errors.state}
+          onChange={(e) => updateBusinessInfo({ state: e.target.value })}
         />
       </div>
 
@@ -91,22 +81,23 @@ export function Step1BusinessInfo() {
         <label className="block font-semibold text-sm text-dark mb-1.5">
           Company Size <span className="text-red">*</span>
         </label>
-        <div className={`grid grid-cols-4 gap-2 ${errors.size ? 'border-2 border-red rounded-lg p-0.5' : ''}`}>
+        <div className={`flex justify-center gap-[35px] ${errors.size ? 'border-2 border-red rounded-lg p-0.5' : ''}`}>
           {SIZES.map((s) => (
-            <RadioCard
-              key={s.value}
-              icon={s.icon}
-              label={s.label}
-              description={s.desc}
-              selected={businessInfo.size === s.value}
-              onClick={() => {
-                updateBusinessInfo({ size: s.value });
-                if (errors.size) setErrors((p) => ({ ...p, size: '' }));
-              }}
-            />
+            <div key={s.value} className="w-[70%] max-w-[170px]">
+              <RadioCard
+                icon={s.icon}
+                label={s.label}
+                description={s.desc}
+                selected={businessInfo.size === s.value}
+                onClick={() => {
+                  updateBusinessInfo({ size: s.value });
+                  if (errors.size) setErrors((p) => ({ ...p, size: '' }));
+                }}
+              />
+            </div>
           ))}
         </div>
-        {errors.size && <p className="text-red text-xs mt-1">{errors.size}</p>}
+        {errors.size && <p className="text-red text-xs mt-1 text-center">{errors.size}</p>}
       </div>
 
       <div className="mb-4">
@@ -121,12 +112,12 @@ export function Step1BusinessInfo() {
         />
       </div>
 
-      <div className="flex justify-end mt-6 pt-4 border-t border-border">
+      <div className="flex justify-end mt-6 pt-4">
         <Button onClick={handleNext}>Continue &rarr;</Button>
       </div>
 
       {/* AI Conversation Box */}
-      <div className="mt-3 pt-3 border-t border-border w-3/4 mx-auto">
+      <div className="mt-3 pt-3 w-3/4 mx-auto">
         <div className="relative flex items-center">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm opacity-70">{'\uD83E\uDD16'}</span>
           <input
