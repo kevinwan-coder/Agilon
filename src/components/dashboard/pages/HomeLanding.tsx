@@ -1,218 +1,248 @@
+import { useState, type ReactNode } from 'react';
 import { useSetupStore } from '../../../store/useSetupStore';
 
-/* ─── Feature Cards ─── */
-const FEATURES = [
+/* ─────────────────── Section Data ─────────────────── */
+
+interface SubItem {
+  name: string;
+  desc: string;
+}
+
+interface Section {
+  id: string;
+  title: string;
+  icon: ReactNode;
+  color: string;
+  items: SubItem[];
+}
+
+const SECTIONS: Section[] = [
   {
-    title: 'Finance',
+    id: 'crm',
+    title: 'Simplified CRM',
+    color: '#2dca72',
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2dca72" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="4" width="20" height="16" rx="2" />
-        <path d="M2 10h20" />
-        <path d="M6 16h4" />
-        <path d="M14 16h4" />
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
-    description: 'Track invoices, expenses, and revenue in real-time. Auto-categorize transactions and generate financial reports instantly.',
+    items: [
+      { name: 'Customer Reaching Channels', desc: 'Agilon Bot, Phone Call, Text Message, Emails & more' },
+      { name: 'Time Scheduler', desc: 'Schedule meetings, set reminders, and manage availability' },
+      { name: 'Task Management', desc: 'Track tasks, set priorities, and manage deadlines' },
+    ],
   },
   {
-    title: 'Projects',
+    id: 'finance',
+    title: 'Financial Manager',
+    color: '#3b82f6',
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2dca72" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="7" height="7" rx="1" />
-        <rect x="14" y="3" width="7" height="7" rx="1" />
-        <rect x="3" y="14" width="7" height="7" rx="1" />
-        <rect x="14" y="14" width="7" height="7" rx="1" />
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="12" y1="1" x2="12" y2="23" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
       </svg>
     ),
-    description: 'Manage client projects, track deliverables, and hit every deadline. Built-in workflows keep your team aligned.',
+    items: [
+      { name: 'Transaction Recording', desc: 'Log and categorize all business transactions automatically' },
+      { name: 'Time-to-Invoice Pipeline', desc: 'One-click conversion from tracked hours to branded invoices' },
+      { name: 'Payments & Payrolls', desc: 'Send/receive payments and manage payroll processing' },
+      { name: 'Tax & Withholding', desc: 'Tax calculations, filing prep, and withholding payments' },
+      { name: 'Planning & Reports', desc: 'Financial planning, forecasting, and detailed reports' },
+    ],
   },
   {
-    title: 'Life',
+    id: 'onboarding',
+    title: 'Client Onboarding Engine',
+    color: '#a855f7',
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2dca72" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2" />
-        <path d="M3 10h18" />
-        <path d="M16 2v4" />
-        <path d="M8 2v4" />
-        <path d="M7 14h2" />
-        <path d="M11 14h2" />
-        <path d="M15 14h2" />
-        <path d="M7 18h2" />
-        <path d="M11 18h2" />
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <line x1="19" y1="8" x2="19" y2="14" />
+        <line x1="22" y1="11" x2="16" y2="11" />
       </svg>
     ),
-    description: 'Balance work and life with smart scheduling, personal goal tracking, and wellness reminders. Your business grows when you do.',
+    items: [
+      { name: 'Automated Contract-to-Project', desc: 'Signed contract auto-creates project folder, Slack channel & task board' },
+      { name: 'Smart Intake Forms', desc: 'AI-powered forms that auto-populate Project Briefs from client answers' },
+      { name: 'Self-Scheduling', desc: 'Clients book during "Onboarding" windows while protecting your Deep Work time' },
+    ],
+  },
+  {
+    id: 'sales',
+    title: 'Sales & Outreach Pipeline',
+    color: '#f59e0b',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+      </svg>
+    ),
+    items: [
+      { name: 'Lead Enrichment', desc: 'Auto-find LinkedIn, company news & revenue, then draft personalized intro emails' },
+      { name: 'Dormant Lead Re-engagement', desc: 'Nudge alerts for high-value past clients you haven\'t contacted in 90 days' },
+    ],
+  },
+  {
+    id: 'ai-agent',
+    title: 'AI Agent Workflow',
+    color: '#22d3ee',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L13.5 8.5L20 7L15.5 12L20 17L13.5 15.5L12 22L10.5 15.5L4 17L8.5 12L4 7L10.5 8.5L12 2Z" />
+      </svg>
+    ),
+    items: [
+      { name: 'Custom AI Agents', desc: 'Build automated workflows powered by AI to handle repetitive tasks' },
+      { name: 'Smart Automation', desc: 'Connect your tools and let AI agents manage processes end-to-end' },
+    ],
   },
 ];
 
-/* ─── Testimonials ─── */
-const TESTIMONIALS = [
-  {
-    text: '"Agilon replaced 5 different apps I was paying for. Now everything is in one place — invoicing, scheduling, document storage."',
-    name: 'Alex Rivera',
-    role: 'Freelance Designer',
-  },
-  {
-    text: '"The AI assistant saves me hours every week. It handles my bookkeeping and sends reminders for deadlines I would have missed."',
-    name: 'Priya Sharma',
-    role: 'Independent Consultant',
-  },
-  {
-    text: '"Setting it up took 2 minutes. Within a day, I had my entire business running more smoothly than ever."',
-    name: 'Jordan Ellis',
-    role: 'Freelance Developer',
-  },
+/* ─────────────────── Channel Icons ─────────────────── */
+
+const CHANNELS = [
+  { name: 'Agilon Bot', icon: '🤖', color: '#2dca72' },
+  { name: 'Phone Call', icon: '📞', color: '#3b82f6' },
+  { name: 'Text Message', icon: '💬', color: '#a855f7' },
+  { name: 'Emails', icon: '📧', color: '#f59e0b' },
+  { name: 'Others', icon: '🔗', color: '#64748b' },
 ];
+
+/* ─────────────────── Quick Stats (mock) ─────────────────── */
+
+const QUICK_STATS = [
+  { label: 'Active Clients', value: '0', icon: '👥' },
+  { label: 'Open Tasks', value: '0', icon: '📋' },
+  { label: 'Invoices Due', value: '$0', icon: '💰' },
+  { label: 'Meetings Today', value: '0', icon: '📅' },
+];
+
+/* ─────────────────── Component ─────────────────── */
 
 export function HomeLanding() {
   const businessInfo = useSetupStore((s) => s.businessInfo);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const isJustMe = businessInfo.size === 'just-me';
-
-  const headline = isJustMe
-    ? 'Manage Your Freelance Life'
-    : 'Run Your Team, Effortlessly';
-  const subheadline = isJustMe
-    ? 'All-in-one OS for business & personal growth'
-    : 'Everything your growing team needs — finances, projects, and operations in one place';
 
   return (
     <div className="-m-8 overflow-y-auto">
-      {/* ─── Hero Section ─── */}
-      <section className="px-12 pt-16 pb-20 flex items-center gap-12">
-        {/* Left — Copy */}
-        <div className="flex-1 max-w-[560px]">
-          <h1 className="text-4xl font-bold text-dark leading-tight mb-4">
-            {headline}
-          </h1>
-          <p className="text-lg text-gray mb-8">
-            {subheadline}
-          </p>
-          <div className="flex items-center gap-4">
-            <button className="px-6 py-3 bg-[#2dca72] text-white text-sm font-semibold rounded-lg cursor-pointer border-none hover:bg-[#25a85f] transition-colors">
-              Get Started Free
-            </button>
-            <button className="px-6 py-3 bg-transparent text-gray text-sm font-semibold rounded-lg cursor-pointer border border-border hover:border-[#7ee8a8] hover:text-[#7ee8a8] transition-colors">
-              Learn More
-            </button>
-          </div>
-        </div>
-
-        {/* Right — Product Mockup */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="w-[380px] h-[260px] rounded-2xl border border-border bg-[#1a1a1a] flex flex-col items-center justify-center gap-4">
-            {/* Mockup illustration */}
-            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-              {/* Dashboard grid */}
-              <rect x="8" y="8" width="28" height="20" rx="3" stroke="#555" strokeWidth="1.5" />
-              <rect x="44" y="8" width="28" height="20" rx="3" stroke="#555" strokeWidth="1.5" />
-              <rect x="8" y="36" width="64" height="16" rx="3" stroke="#555" strokeWidth="1.5" />
-              {/* Chart lines */}
-              <polyline points="14,48 24,42 34,46 44,40 54,44 64,38" stroke="#2dca72" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              {/* Nodes */}
-              <circle cx="30" cy="66" r="4" stroke="#2dca72" strokeWidth="1.5" fill="none" />
-              <circle cx="50" cy="66" r="4" stroke="#555" strokeWidth="1.5" fill="none" />
-              <line x1="34" y1="66" x2="46" y2="66" stroke="#555" strokeWidth="1.5" />
-              {/* Calendar icon */}
-              <rect x="56" y="58" width="14" height="14" rx="2" stroke="#555" strokeWidth="1.5" />
-              <line x1="60" y1="56" x2="60" y2="60" stroke="#555" strokeWidth="1.5" />
-              <line x1="66" y1="56" x2="66" y2="60" stroke="#555" strokeWidth="1.5" />
-            </svg>
-            <span className="text-xs text-gray uppercase tracking-wider font-semibold">Product Mockup</span>
-          </div>
-        </div>
+      {/* ─── Welcome Header ─── */}
+      <section className="px-10 pt-10 pb-6">
+        <h1 className="text-3xl font-bold text-dark mb-2">
+          Welcome{businessInfo.name ? `, ${businessInfo.name}` : ''}
+        </h1>
+        <p className="text-gray text-base">
+          {isJustMe
+            ? 'Your all-in-one workspace for managing clients, finances, and growth.'
+            : 'Your team workspace — CRM, finances, onboarding, and sales in one place.'}
+        </p>
       </section>
 
-      {/* ─── Divider ─── */}
-      <div className="mx-12 border-t border-border" />
-
-      {/* ─── Key Features ─── */}
-      <section className="px-12 py-16">
-        <h2 className="text-xs font-bold text-gray uppercase tracking-[0.2em] mb-8">Key Features</h2>
-        <div className="grid grid-cols-3 gap-6">
-          {FEATURES.map((feat) => (
+      {/* ─── Quick Stats ─── */}
+      <section className="px-10 pb-8">
+        <div className="grid grid-cols-4 gap-4">
+          {QUICK_STATS.map((stat) => (
             <div
-              key={feat.title}
-              className="bg-[#1a1a1a] rounded-xl border border-border p-6 hover:border-[#7ee8a8] transition-colors cursor-pointer"
+              key={stat.label}
+              className="bg-[#1a1a1a] rounded-xl border border-border p-5 flex items-center gap-4 hover:border-[#333] transition-colors"
             >
-              <div className="mb-4">{feat.icon}</div>
-              <h3 className="text-base font-bold text-dark uppercase tracking-wide mb-3">{feat.title}</h3>
-              <p className="text-sm text-gray leading-relaxed">{feat.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── Divider ─── */}
-      <div className="mx-12 border-t border-border" />
-
-      {/* ─── Testimonials ─── */}
-      <section className="px-12 py-16 text-center">
-        <h2 className="text-xs font-bold text-gray uppercase tracking-[0.2em] mb-2">
-          {isJustMe ? 'Trusted by Top Freelancers' : 'Trusted by Growing Teams'}
-        </h2>
-        <p className="text-sm text-gray mb-10">See what people are saying about Agilon</p>
-        <div className="grid grid-cols-3 gap-6">
-          {TESTIMONIALS.map((t) => (
-            <div key={t.name} className="bg-[#1a1a1a] rounded-xl border border-border p-6 text-left">
-              <p className="text-sm text-dark leading-relaxed mb-4 italic">{t.text}</p>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#252525] flex items-center justify-center text-xs font-bold text-gray">
-                  {t.name[0]}
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-dark">{t.name}</div>
-                  <div className="text-xs text-gray">{t.role}</div>
-                </div>
+              <span className="text-2xl">{stat.icon}</span>
+              <div>
+                <div className="text-xl font-bold text-dark">{stat.value}</div>
+                <div className="text-xs text-gray">{stat.label}</div>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ─── Divider ─── */}
-      <div className="mx-12 border-t border-border" />
-
-      {/* ─── CTA Section ─── */}
-      <section className="px-12 py-16 flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-dark mb-2">Ready to Start?</h2>
-          <p className="text-sm text-gray">Join thousands of {isJustMe ? 'freelancers' : 'small teams'} running their business with Agilon.</p>
+      {/* ─── Customer Reaching Channels ─── */}
+      <section className="px-10 pb-8">
+        <h2 className="text-xs font-bold text-gray uppercase tracking-[0.2em] mb-4">Customer Channels</h2>
+        <div className="flex gap-3">
+          {CHANNELS.map((ch) => (
+            <button
+              key={ch.name}
+              className="flex-1 bg-[#1a1a1a] rounded-xl border border-border p-4 flex flex-col items-center gap-2 hover:border-[#7ee8a8] transition-colors cursor-pointer"
+            >
+              <span className="text-2xl">{ch.icon}</span>
+              <span className="text-xs text-gray font-medium">{ch.name}</span>
+            </button>
+          ))}
         </div>
-        <div className="flex items-center gap-4">
-          <button className="px-6 py-3 bg-[#2dca72] text-white text-sm font-semibold rounded-lg cursor-pointer border-none hover:bg-[#25a85f] transition-colors">
-            Get Started Free
-          </button>
-          <button className="px-6 py-3 bg-transparent text-gray text-sm font-semibold rounded-lg cursor-pointer border border-border hover:border-[#7ee8a8] hover:text-[#7ee8a8] transition-colors">
-            View Testimonials
-          </button>
+      </section>
+
+      {/* ─── Main Sections ─── */}
+      <section className="px-10 pb-8">
+        <h2 className="text-xs font-bold text-gray uppercase tracking-[0.2em] mb-4">Your Modules</h2>
+        <div className="grid grid-cols-1 gap-4">
+          {SECTIONS.map((section) => {
+            const isExpanded = expandedSection === section.id;
+
+            return (
+              <div
+                key={section.id}
+                className="bg-[#1a1a1a] rounded-xl border border-border overflow-hidden hover:border-[#333] transition-colors"
+              >
+                {/* Section Header */}
+                <button
+                  onClick={() => setExpandedSection(isExpanded ? null : section.id)}
+                  className="w-full px-6 py-5 flex items-center gap-4 bg-transparent border-none cursor-pointer text-left transition-colors hover:bg-[#1e1e1e]"
+                >
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${section.color}15`, color: section.color }}
+                  >
+                    {section.icon}
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-base font-semibold text-dark">{section.title}</div>
+                    <div className="text-xs text-gray mt-0.5">{section.items.length} features</div>
+                  </div>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#666"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+
+                {/* Expanded Content */}
+                {isExpanded && (
+                  <div className="px-6 pb-5 border-t border-border">
+                    <div className="grid grid-cols-2 gap-3 pt-4">
+                      {section.items.map((item) => (
+                        <div
+                          key={item.name}
+                          className="bg-[#252525] rounded-lg p-4 hover:bg-[#2a2a2a] transition-colors cursor-pointer"
+                        >
+                          <div className="text-sm font-semibold text-dark mb-1">{item.name}</div>
+                          <div className="text-xs text-gray leading-relaxed">{item.desc}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </section>
 
       {/* ─── Footer ─── */}
-      <footer className="px-12 py-6 border-t border-border flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <span className="text-sm font-bold text-dark">Agilon.AI</span>
-          <a href="#" className="text-xs text-gray hover:text-[#7ee8a8] transition-colors no-underline">About</a>
-          <a href="#" className="text-xs text-gray hover:text-[#7ee8a8] transition-colors no-underline">Support</a>
-          <a href="#" className="text-xs text-gray hover:text-[#7ee8a8] transition-colors no-underline">Terms</a>
-          <a href="#" className="text-xs text-gray hover:text-[#7ee8a8] transition-colors no-underline">Privacy</a>
-        </div>
-        <div className="flex items-center gap-4">
-          {/* Twitter / X */}
-          <a href="#" className="text-gray hover:text-[#7ee8a8] transition-colors">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
-          </a>
-          {/* Instagram */}
-          <a href="#" className="text-gray hover:text-[#7ee8a8] transition-colors">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" />
-              <circle cx="12" cy="12" r="5" />
-              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
-            </svg>
-          </a>
-        </div>
+      <footer className="px-10 py-6 border-t border-border flex items-center justify-between">
+        <span className="text-sm font-bold text-dark">Agilon.AI</span>
+        <span className="text-xs text-gray">Powered by AI — Built for {isJustMe ? 'freelancers' : 'small teams'}</span>
       </footer>
     </div>
   );
