@@ -184,7 +184,7 @@ export function HomeLanding() {
         </div>
 
         {/* ─── Row 2: What's New Today + Calendar ─── */}
-        <div className="flex gap-6 mb-6">
+        <div className="flex gap-6 mb-6 mt-[-120px]">
           {/* Left — What's New Today */}
           <div className="flex-1">
             <h2 className="text-lg font-bold text-dark mb-4">What's New Today ?</h2>
@@ -216,8 +216,8 @@ export function HomeLanding() {
             </div>
           </div>
 
-          {/* Right — Calendar */}
-          <div className="w-[260px] flex-shrink-0">
+          {/* Right — Calendar (60px gap from Balance above) */}
+          <div className="w-[260px] flex-shrink-0 mt-[60px]">
             <MiniCalendar />
           </div>
         </div>
