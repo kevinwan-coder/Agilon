@@ -138,7 +138,7 @@ export function HomeLanding() {
       <div className="pt-2 pb-10">
 
         {/* ─── Row 1: To Do List + Financial Summary ─── */}
-        <div className="flex gap-6 mb-1 items-start">
+        <div className="flex gap-6 mb-8 items-start">
           {/* Left — To Do List */}
           <div className="flex-1">
             <h2 className="text-lg font-bold text-dark mb-4">To Do List</h2>
@@ -184,7 +184,7 @@ export function HomeLanding() {
         </div>
 
         {/* ─── Row 2: What's New Today + Calendar ─── */}
-        <div className="flex gap-6 mb-6 mt-[-120px]">
+        <div className="flex gap-6 mb-6 mt-[50px]">
           {/* Left — What's New Today */}
           <div className="flex-1">
             <h2 className="text-lg font-bold text-dark mb-4">What's New Today ?</h2>
