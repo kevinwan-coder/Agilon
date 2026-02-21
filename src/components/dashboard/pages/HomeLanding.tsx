@@ -1,132 +1,51 @@
-/* ─────────────────── To-Do Cards ─────────────────── */
+/* ─────────────────── HomeLanding – New Card Design ─────────────────── */
 
-const TODO_ITEMS = [
-  { label: 'Company Setup', value: 'Unfinished', isAlert: true },
-  { label: 'Payment', value: 'Approval', isAlert: false },
-  { label: 'Next Appoint', value: '3:30 PM', isAlert: false },
-  { label: 'Replies', value: '2, 8', isAlert: true },
-];
+/* ─── Performance Chart (AI Insights) ─── */
 
-/* ─────────────────── News / Events ─────────────────── */
-
-const NEWS_ITEMS = ['Financial Updates', 'News', 'Sports'];
-
-const EVENT_ITEMS = ["Dad's Birthday", 'Golf with Dr. Wan', 'Illini Game'];
-
-/* ─────────────────── Quick Access ─────────────────── */
-
-const QUICK_LINKS = [
-  { id: 'projects', label: 'Projects', icon: '📁' },
-  { id: 'clients', label: 'Clients', icon: '👥' },
-  { id: 'marketing', label: 'Marketing', icon: '📢' },
-  { id: 'financial', label: 'Financial', icon: '💰' },
-];
-
-/* ─────────────────── Performance Chart ─────────────────── */
-
-function PerformanceChart() {
+function InsightsChart() {
   return (
-    <div>
-      <h3 className="text-sm font-bold text-dark mb-3">My Performance</h3>
-      <div className="bg-[#1a1a1a] rounded-xl border border-border p-3">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-semibold text-dark">Performance</span>
-          <button className="text-gray text-xs cursor-pointer bg-transparent border-none hover:text-dark">⋮</button>
-        </div>
-        <svg width="100%" height="78" viewBox="0 0 200 78" preserveAspectRatio="none">
-          {/* Grid lines */}
-          <line x1="30" y1="5" x2="30" y2="65" stroke="#333" strokeWidth="0.5" />
-          <line x1="30" y1="65" x2="190" y2="65" stroke="#333" strokeWidth="0.5" />
-          {/* Horizontal grid */}
-          <line x1="30" y1="15" x2="190" y2="15" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-          <line x1="30" y1="30" x2="190" y2="30" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-          <line x1="30" y1="45" x2="190" y2="45" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-          <line x1="30" y1="55" x2="190" y2="55" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-          {/* Vertical grid */}
-          <line x1="70" y1="5" x2="70" y2="65" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-          <line x1="110" y1="5" x2="110" y2="65" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-          <line x1="150" y1="5" x2="150" y2="65" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-          <line x1="190" y1="5" x2="190" y2="65" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-          {/* Y-axis labels */}
-          <text x="25" y="18" textAnchor="end" fill="#666" fontSize="7">800</text>
-          <text x="25" y="33" textAnchor="end" fill="#666" fontSize="7">600</text>
-          <text x="25" y="48" textAnchor="end" fill="#666" fontSize="7">400</text>
-          <text x="25" y="58" textAnchor="end" fill="#666" fontSize="7">200</text>
-          <text x="25" y="68" textAnchor="end" fill="#666" fontSize="7">0</text>
-          {/* X-axis labels */}
-          <text x="50" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">A</text>
-          <text x="90" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">B</text>
-          <text x="130" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">C</text>
-          <text x="170" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">D</text>
-          <text x="190" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">E</text>
-          {/* Performance curve */}
-          <path
-            d="M 30 40 C 50 38, 60 32, 80 27 C 100 22, 120 18, 140 17 C 155 16, 165 17, 175 20 C 182 22, 188 25, 190 28"
-            fill="none"
-            stroke="#22d3ee"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────── Calendar Helper ─────────────────── */
-
-function MiniCalendar() {
-  const now = new Date();
-  const year = 2026;
-  const month = 1; // February (0-indexed)
-  const today = now.getDate();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstDay = new Date(year, month, 1).getDay();
-  const startOffset = firstDay === 0 ? 6 : firstDay - 1;
-
-  const dayNames = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
-  const cells: (number | null)[] = [];
-  for (let i = 0; i < startOffset; i++) cells.push(null);
-  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
-
-  return (
-    <div className="bg-[#1a1a1a] rounded-xl border border-border p-4">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-3">
-        <button className="w-7 h-7 rounded-md bg-[#252525] border border-border text-gray text-xs flex items-center justify-center cursor-pointer hover:text-dark">
-          &larr;
-        </button>
-        <span className="text-sm font-semibold text-dark">February 2026</span>
-        <button className="w-7 h-7 rounded-md bg-[#252525] border border-border text-gray text-xs flex items-center justify-center cursor-pointer hover:text-dark">
-          &rarr;
-        </button>
-      </div>
-
-      {/* Day Names */}
-      <div className="grid grid-cols-7 gap-0.5 mb-1">
-        {dayNames.map((d) => (
-          <div key={d} className="text-[10px] text-gray text-center font-medium py-1">{d}</div>
-        ))}
-      </div>
-
-      {/* Day Numbers */}
-      <div className="grid grid-cols-7 gap-0.5">
-        {cells.map((day, i) => (
-          <div
-            key={i}
-            className={`text-xs text-center py-1.5 rounded-md cursor-pointer transition-colors ${
-              day === null
-                ? ''
-                : day === today
-                  ? 'bg-[#3b82f6] text-white font-bold'
-                  : 'text-gray hover:bg-[#252525] hover:text-dark'
-            }`}
-          >
-            {day ?? ''}
-          </div>
-        ))}
-      </div>
-    </div>
+    <svg width="100%" height="140" viewBox="0 0 260 140" preserveAspectRatio="xMidYMid meet">
+      {/* Grid lines */}
+      <line x1="40" y1="10" x2="40" y2="110" stroke="#333" strokeWidth="0.5" />
+      <line x1="40" y1="110" x2="250" y2="110" stroke="#333" strokeWidth="0.5" />
+      {/* Horizontal grid */}
+      <line x1="40" y1="30" x2="250" y2="30" stroke="#252525" strokeWidth="0.5" strokeDasharray="3" />
+      <line x1="40" y1="50" x2="250" y2="50" stroke="#252525" strokeWidth="0.5" strokeDasharray="3" />
+      <line x1="40" y1="70" x2="250" y2="70" stroke="#252525" strokeWidth="0.5" strokeDasharray="3" />
+      <line x1="40" y1="90" x2="250" y2="90" stroke="#252525" strokeWidth="0.5" strokeDasharray="3" />
+      {/* Y-axis labels */}
+      <text x="35" y="34" textAnchor="end" fill="#666" fontSize="9">4000</text>
+      <text x="35" y="54" textAnchor="end" fill="#666" fontSize="9">3000</text>
+      <text x="35" y="74" textAnchor="end" fill="#666" fontSize="9">2000</text>
+      <text x="35" y="94" textAnchor="end" fill="#666" fontSize="9">1000</text>
+      {/* X-axis labels */}
+      <text x="60" y="125" textAnchor="middle" fill="#666" fontSize="8">N</text>
+      <text x="100" y="125" textAnchor="middle" fill="#666" fontSize="8">10</text>
+      <text x="140" y="125" textAnchor="middle" fill="#666" fontSize="8">18</text>
+      <text x="180" y="125" textAnchor="middle" fill="#666" fontSize="8">30</text>
+      <text x="220" y="125" textAnchor="middle" fill="#666" fontSize="8">300</text>
+      <text x="245" y="125" textAnchor="middle" fill="#666" fontSize="8">100</text>
+      {/* Area fill */}
+      <path
+        d="M 40 95 C 60 90, 80 80, 100 70 C 120 60, 140 45, 170 35 C 190 28, 210 25, 230 22 L 250 20 L 250 110 L 40 110 Z"
+        fill="url(#chartGradient)"
+        opacity="0.3"
+      />
+      {/* Performance curve */}
+      <path
+        d="M 40 95 C 60 90, 80 80, 100 70 C 120 60, 140 45, 170 35 C 190 28, 210 25, 230 22 L 250 20"
+        fill="none"
+        stroke="#22d3ee"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <defs>
+        <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
   );
 }
 
@@ -137,111 +56,142 @@ export function HomeLanding() {
     <div className="overflow-y-auto">
       <div className="pt-2 pb-10">
 
-        {/* ─── Row 1: To Do List + Financial Summary ─── */}
-        <div className="flex gap-6 mb-8 items-start">
-          {/* Left — To Do List */}
-          <div className="flex-1">
-            <h2 className="text-lg font-bold text-dark mb-4">To Do List</h2>
-            <div className="flex gap-4 justify-start">
-              {TODO_ITEMS.map((item) => (
-                <div
-                  key={item.label}
-                  className="w-[160px] flex-shrink-0 bg-[#1a1a1a] rounded-xl border border-border px-3 py-3 text-center cursor-pointer hover:border-[#444] transition-colors"
-                >
-                  <div className="text-xs text-gray mb-1.5">{item.label}</div>
-                  <div className={`text-sm font-bold ${item.isAlert ? 'text-[#ef4444]' : 'text-dark'}`}>
-                    {item.value}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* ═══════════ ROW 1: To Do List ═══════════ */}
+        <h2 className="text-lg font-bold text-dark mb-4">To Do List</h2>
+        <div className="grid grid-cols-3 gap-5 mb-8">
 
-          {/* Right — Financial Summary */}
-          <div className="w-[260px] flex-shrink-0 mt-[36px]">
-            <div className="bg-[#1a1a1a] rounded-xl border border-border p-5">
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray">Balance:</span>
-                  <span className="text-dark font-semibold">$12,715.50</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray">Payments:</span>
-                  <span className="text-dark font-semibold">$2,700.50</span>
-                </div>
-                <div className="text-[10px] text-gray text-right">(EOM)</div>
-                <div className="flex justify-between">
-                  <span className="text-gray">Exp. Receiving:</span>
-                  <span className="text-dark font-semibold">$3,758.25</span>
-                </div>
-                <div className="border-t border-border pt-2 flex justify-between">
-                  <span className="text-gray">Balance:</span>
-                  <span className="text-dark font-bold">—</span>
-                </div>
+          {/* ── Approvals Card ── */}
+          <div className="bg-[#1a1a1a] rounded-2xl border border-border p-5 flex flex-col justify-between min-h-[180px]">
+            <div>
+              <h3 className="text-base font-bold text-dark mb-3">Approvals</h3>
+              <span className="inline-block bg-[#22c55e] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3">3 Pending</span>
+              <div className="space-y-1 text-sm text-gray">
+                <div>Invoice for Client X</div>
+                <div>Pitch for LY Went Z</div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* ─── Row 2: What's New Today + Calendar ─── */}
-        <div className="flex gap-6 mb-6 mt-[-5px]">
-          {/* Left — What's New Today */}
-          <div className="flex-1">
-            <h2 className="text-lg font-bold text-dark mb-4">What's New Today ?</h2>
-            <div className="grid grid-cols-3 gap-6">
-              {/* Subscribed News */}
-              <div>
-                <h3 className="text-sm font-bold text-dark mb-3">Subscribed News Update</h3>
-                <div className="space-y-2">
-                  {NEWS_ITEMS.map((item) => (
-                    <div key={item} className="text-sm text-gray">• {item}</div>
-                  ))}
-                </div>
-              </div>
-
-              {/* My Events */}
-              <div>
-                <h3 className="text-sm font-bold text-dark mb-3">My Events</h3>
-                <div className="space-y-2">
-                  {EVENT_ITEMS.map((item) => (
-                    <div key={item} className="text-sm text-gray">• {item}</div>
-                  ))}
-                </div>
-              </div>
-
-              {/* My Performance */}
-              <div>
-                <PerformanceChart />
-              </div>
-            </div>
-          </div>
-
-          {/* Right — Calendar (60px gap from Balance above) */}
-          <div className="w-[260px] flex-shrink-0 mt-[60px]">
-            <MiniCalendar />
-          </div>
-        </div>
-
-        {/* ─── Row 3: Quick Access Buttons ─── */}
-        <div className="mb-4">
-          <div className="flex gap-4">
-            {QUICK_LINKS.map((link) => (
-              <button
-                key={link.id}
-                className="w-[200px] h-[80px] bg-[#1a1a1a] rounded-xl border border-border flex items-center justify-center gap-3 text-sm font-semibold text-dark cursor-pointer hover:border-[#444] hover:bg-[#1e1e1e] transition-colors"
-              >
-                <span className="text-xl">{link.icon}</span>
-                {link.label}
+            <div className="mt-4">
+              <button className="bg-[#3b82f6] text-white text-xs font-semibold px-5 py-2 rounded-lg border-none cursor-pointer hover:bg-[#2563eb] transition-colors">
+                Review
               </button>
-            ))}
+            </div>
+          </div>
+
+          {/* ── Focus Mode Card ── */}
+          <div className="bg-[#1a1a1a] rounded-2xl border border-border p-5 flex flex-col items-center justify-between min-h-[180px]">
+            <div className="flex flex-col items-center">
+              <h3 className="text-base font-bold text-dark mb-3">Focus Mode</h3>
+              {/* Circular progress ring */}
+              <div className="relative w-16 h-16 mb-2">
+                <svg viewBox="0 0 64 64" className="w-full h-full">
+                  <circle cx="32" cy="32" r="28" fill="none" stroke="#252525" strokeWidth="4" />
+                  <circle cx="32" cy="32" r="28" fill="none" stroke="#22c55e" strokeWidth="4"
+                    strokeDasharray="132 44"
+                    strokeLinecap="round"
+                    transform="rotate(-90 32 32)"
+                  />
+                </svg>
+              </div>
+              <div className="text-2xl font-bold text-dark">2:45:18</div>
+              <div className="text-xs text-gray mt-1">Deep Work Session Active</div>
+            </div>
+            <div className="mt-4">
+              <button className="bg-[#22c55e] text-white text-xs font-semibold px-5 py-2 rounded-lg border-none cursor-pointer hover:bg-[#16a34a] transition-colors">
+                End Moon
+              </button>
+            </div>
+          </div>
+
+          {/* ── Pipeline Card ── */}
+          <div className="bg-[#1a1a1a] rounded-2xl border border-border p-5 flex flex-col justify-between min-h-[180px]">
+            <div>
+              <h3 className="text-base font-bold text-dark mb-3">Pipeline</h3>
+              <span className="inline-block bg-[#7c3aed] text-white text-xs font-semibold px-3 py-1 rounded-full mb-3">2 Dormant Leads</span>
+              <div className="space-y-1 text-sm text-gray">
+                <div>Disch for UK Wiers Y</div>
+                <div>Lead B, Lead (105 days)</div>
+              </div>
+            </div>
+            <div className="mt-4">
+              <button className="bg-[#ef4444] text-white text-xs font-semibold px-5 py-2 rounded-lg border-none cursor-pointer hover:bg-[#dc2626] transition-colors">
+                End Report
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* + Button on new line */}
-        <div className="mb-8">
-          <button className="w-[200px] h-[80px] bg-[#1a1a1a] rounded-xl border border-border text-2xl text-gray cursor-pointer hover:border-[#444] hover:text-dark transition-colors flex items-center justify-center">
-            +
-          </button>
+        {/* ═══════════ ROW 2: Performance AI Insights ═══════════ */}
+        <h2 className="text-lg font-bold text-dark mb-4">Performance AI Insights</h2>
+        <div className="grid grid-cols-2 gap-5 mb-8">
+
+          {/* ── AI Insights Chart ── */}
+          <div className="bg-[#1a1a1a] rounded-2xl border border-border p-5">
+            <p className="text-sm font-semibold text-dark mb-4">
+              Your Profitibility is <span className="text-[#22c55e]">UP 12%</span> Since Specialized in Technical Writing
+            </p>
+            <InsightsChart />
+          </div>
+
+          {/* ── Automated Project Folders ── */}
+          <div className="bg-[#1a1a1a] rounded-2xl border border-border p-5">
+            <h3 className="text-base font-bold text-dark mb-4">Automated Project Folders</h3>
+            <div className="grid grid-cols-2 gap-3">
+              {/* Project Alpha */}
+              <div className="bg-[#252525] rounded-xl p-3 flex items-center gap-3">
+                <span className="text-2xl">📁</span>
+                <div>
+                  <div className="text-sm font-semibold text-dark">Project Alpha</div>
+                  <div className="text-xs text-gray">[Drive] [Notion]</div>
+                </div>
+              </div>
+              {/* Dies A */}
+              <div className="bg-[#252525] rounded-xl p-3 flex items-center gap-3">
+                <span className="text-2xl">📄</span>
+                <div>
+                  <div className="text-sm font-semibold text-dark">Dies A</div>
+                  <div className="text-xs text-gray">[Slack] [Notion]</div>
+                </div>
+              </div>
+              {/* Project Beta */}
+              <div className="bg-[#252525] rounded-xl p-3 flex items-center gap-3">
+                <span className="text-2xl">📁</span>
+                <div>
+                  <div className="text-sm font-semibold text-dark">Project Beta</div>
+                  <div className="text-xs text-gray">[Slack] [Trello]</div>
+                </div>
+              </div>
+              {/* + New Project */}
+              <div className="bg-[#252525] rounded-xl p-3 flex items-center gap-3 cursor-pointer hover:bg-[#333] transition-colors">
+                <span className="text-2xl text-[#22c55e]">+</span>
+                <div className="text-sm font-semibold text-gray">New Project</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ═══════════ ROW 3: Project Folders + Dynamic News ═══════════ */}
+        <h2 className="text-lg font-bold text-dark mb-4">Automated Project Folders</h2>
+        <div className="grid grid-cols-2 gap-5 mb-8">
+
+          {/* ── Project Folder Quick Access ── */}
+          <div className="flex gap-3">
+            <div className="bg-[#1a1a1a] rounded-2xl border border-border p-5 flex items-center gap-4 flex-1">
+              <span className="text-3xl">📁</span>
+              <span className="text-sm font-bold text-dark">Project Beta</span>
+            </div>
+            <button className="bg-[#1a1a1a] rounded-2xl border border-border w-14 flex items-center justify-center text-2xl text-gray cursor-pointer hover:border-[#444] hover:text-dark transition-colors">
+              +
+            </button>
+          </div>
+
+          {/* ── Dynamic News Update ── */}
+          <div className="bg-[#1a1a1a] rounded-2xl border border-border p-5">
+            <h3 className="text-base font-bold text-dark mb-3">Dynamic News Update</h3>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray">
+              <div>AI Powered Design Tools Disrupt Cost $ Freelancers</div>
+              <div>New Tax Laws for Freelancers Work Trends</div>
+            </div>
+          </div>
         </div>
 
       </div>
