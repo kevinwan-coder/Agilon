@@ -22,8 +22,10 @@ export function DashboardLayout({ children, activePage, onNavigate }: DashboardL
   return (
     <div className="flex flex-col h-screen bg-light overflow-hidden">
       <DashboardTopBar activePage={activePage} onNavigate={onNavigate} />
-      <main className="flex-1 overflow-y-auto p-8 relative">
-        {children}
+      <main className="flex-1 overflow-y-auto relative">
+        <div className="w-[1280px] mx-auto p-8">
+          {children}
+        </div>
 
         {/* Floating AI conversation box — bottom center */}
         <div className="sticky bottom-0 left-0 right-0 flex justify-center pb-4 pt-6 pointer-events-none"

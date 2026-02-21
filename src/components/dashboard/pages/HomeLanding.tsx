@@ -97,8 +97,8 @@ export function HomeLanding() {
   const [eventsChecked, setEventsChecked] = useState<boolean[]>(EVENT_ITEMS.map(() => false));
 
   return (
-    <div className="-m-8 overflow-y-auto">
-      <div className="px-10 pt-8 pb-10">
+    <div className="overflow-y-auto">
+      <div className="pt-2 pb-10">
 
         {/* ─── Row 1: To Do List + Financial Summary ─── */}
         <div className="flex gap-6 mb-8">
