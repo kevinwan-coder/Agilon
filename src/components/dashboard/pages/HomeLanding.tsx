@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useSetupStore } from '../../../store/useSetupStore';
 
 /* ─────────────────── To-Do Cards ─────────────────── */
 
@@ -94,7 +93,6 @@ function MiniCalendar() {
 /* ─────────────────── Component ─────────────────── */
 
 export function HomeLanding() {
-  const businessInfo = useSetupStore((s) => s.businessInfo);
   const [newsChecked, setNewsChecked] = useState<boolean[]>(NEWS_ITEMS.map(() => false));
   const [eventsChecked, setEventsChecked] = useState<boolean[]>(EVENT_ITEMS.map(() => false));
 
