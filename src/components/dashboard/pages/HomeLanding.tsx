@@ -105,11 +105,11 @@ export function HomeLanding() {
           {/* Left — To Do List */}
           <div className="flex-1">
             <h2 className="text-lg font-bold text-dark mb-4">To Do List</h2>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-start">
               {TODO_ITEMS.map((item) => (
                 <div
                   key={item.label}
-                  className="flex-1 bg-[#1a1a1a] rounded-xl border border-border p-4 text-center cursor-pointer hover:border-[#444] transition-colors"
+                  className="w-[200px] flex-shrink-0 bg-[#1a1a1a] rounded-xl border border-border p-4 text-center cursor-pointer hover:border-[#444] transition-colors"
                 >
                   <div className="text-xs text-gray mb-2">{item.label}</div>
                   <div className={`text-sm font-bold ${item.isAlert ? 'text-[#ef4444]' : 'text-dark'}`}>
