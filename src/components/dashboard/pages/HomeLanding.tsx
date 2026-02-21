@@ -16,56 +16,59 @@ const EVENT_ITEMS = ["Dad's Birthday", 'Golf with Dr. Wan', 'Illini Game'];
 /* ─────────────────── Quick Access ─────────────────── */
 
 const QUICK_LINKS = [
-  { id: 'projects', label: 'Projects' },
-  { id: 'clients', label: 'Clients' },
-  { id: 'marketing', label: 'Marketing' },
-  { id: 'financial', label: 'Financial' },
+  { id: 'projects', label: 'Projects', icon: '📁' },
+  { id: 'clients', label: 'Clients', icon: '👥' },
+  { id: 'marketing', label: 'Marketing', icon: '📢' },
+  { id: 'financial', label: 'Financial', icon: '💰' },
 ];
 
 /* ─────────────────── Performance Chart ─────────────────── */
 
 function PerformanceChart() {
   return (
-    <div className="bg-[#1a1a1a] rounded-xl border border-border p-4">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-bold text-dark">Performance</h3>
-        <button className="text-gray text-xs cursor-pointer bg-transparent border-none hover:text-dark">⋮</button>
+    <div>
+      <h3 className="text-sm font-bold text-dark mb-3">My Performance</h3>
+      <div className="bg-[#1a1a1a] rounded-xl border border-border p-3">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs font-semibold text-dark">Performance</span>
+          <button className="text-gray text-xs cursor-pointer bg-transparent border-none hover:text-dark">⋮</button>
+        </div>
+        <svg width="100%" height="78" viewBox="0 0 200 78" preserveAspectRatio="none">
+          {/* Grid lines */}
+          <line x1="30" y1="5" x2="30" y2="65" stroke="#333" strokeWidth="0.5" />
+          <line x1="30" y1="65" x2="190" y2="65" stroke="#333" strokeWidth="0.5" />
+          {/* Horizontal grid */}
+          <line x1="30" y1="15" x2="190" y2="15" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
+          <line x1="30" y1="30" x2="190" y2="30" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
+          <line x1="30" y1="45" x2="190" y2="45" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
+          <line x1="30" y1="55" x2="190" y2="55" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
+          {/* Vertical grid */}
+          <line x1="70" y1="5" x2="70" y2="65" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
+          <line x1="110" y1="5" x2="110" y2="65" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
+          <line x1="150" y1="5" x2="150" y2="65" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
+          <line x1="190" y1="5" x2="190" y2="65" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
+          {/* Y-axis labels */}
+          <text x="25" y="18" textAnchor="end" fill="#666" fontSize="7">800</text>
+          <text x="25" y="33" textAnchor="end" fill="#666" fontSize="7">600</text>
+          <text x="25" y="48" textAnchor="end" fill="#666" fontSize="7">400</text>
+          <text x="25" y="58" textAnchor="end" fill="#666" fontSize="7">200</text>
+          <text x="25" y="68" textAnchor="end" fill="#666" fontSize="7">0</text>
+          {/* X-axis labels */}
+          <text x="50" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">A</text>
+          <text x="90" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">B</text>
+          <text x="130" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">C</text>
+          <text x="170" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">D</text>
+          <text x="190" y="75" textAnchor="middle" fill="#3b82f6" fontSize="7">E</text>
+          {/* Performance curve */}
+          <path
+            d="M 30 40 C 50 38, 60 32, 80 27 C 100 22, 120 18, 140 17 C 155 16, 165 17, 175 20 C 182 22, 188 25, 190 28"
+            fill="none"
+            stroke="#22d3ee"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
       </div>
-      <svg width="100%" height="120" viewBox="0 0 200 120" preserveAspectRatio="none">
-        {/* Grid lines */}
-        <line x1="30" y1="10" x2="30" y2="100" stroke="#333" strokeWidth="0.5" />
-        <line x1="30" y1="100" x2="190" y2="100" stroke="#333" strokeWidth="0.5" />
-        {/* Horizontal grid */}
-        <line x1="30" y1="25" x2="190" y2="25" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-        <line x1="30" y1="45" x2="190" y2="45" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-        <line x1="30" y1="65" x2="190" y2="65" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-        <line x1="30" y1="85" x2="190" y2="85" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-        {/* Vertical grid */}
-        <line x1="70" y1="10" x2="70" y2="100" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-        <line x1="110" y1="10" x2="110" y2="100" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-        <line x1="150" y1="10" x2="150" y2="100" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-        <line x1="190" y1="10" x2="190" y2="100" stroke="#252525" strokeWidth="0.5" strokeDasharray="2" />
-        {/* Y-axis labels */}
-        <text x="25" y="28" textAnchor="end" fill="#666" fontSize="8">800</text>
-        <text x="25" y="48" textAnchor="end" fill="#666" fontSize="8">600</text>
-        <text x="25" y="68" textAnchor="end" fill="#666" fontSize="8">400</text>
-        <text x="25" y="88" textAnchor="end" fill="#666" fontSize="8">200</text>
-        <text x="25" y="103" textAnchor="end" fill="#666" fontSize="8">0</text>
-        {/* X-axis labels */}
-        <text x="50" y="112" textAnchor="middle" fill="#3b82f6" fontSize="8">A</text>
-        <text x="90" y="112" textAnchor="middle" fill="#3b82f6" fontSize="8">B</text>
-        <text x="130" y="112" textAnchor="middle" fill="#3b82f6" fontSize="8">C</text>
-        <text x="170" y="112" textAnchor="middle" fill="#3b82f6" fontSize="8">D</text>
-        <text x="190" y="112" textAnchor="middle" fill="#3b82f6" fontSize="8">E</text>
-        {/* Performance curve */}
-        <path
-          d="M 30 60 C 50 58, 60 50, 80 42 C 100 34, 120 28, 140 26 C 155 25, 165 26, 175 30 C 182 33, 188 38, 190 42"
-          fill="none"
-          stroke="#22d3ee"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-      </svg>
     </div>
   );
 }
@@ -135,7 +138,7 @@ export function HomeLanding() {
       <div className="pt-2 pb-10">
 
         {/* ─── Row 1: To Do List + Financial Summary ─── */}
-        <div className="flex gap-6 mb-8 items-start">
+        <div className="flex gap-6 mb-4 items-start">
           {/* Left — To Do List */}
           <div className="flex-1">
             <h2 className="text-lg font-bold text-dark mb-4">To Do List</h2>
@@ -154,7 +157,7 @@ export function HomeLanding() {
             </div>
           </div>
 
-          {/* Right — Financial Summary (top-aligned with cards via mt to skip "To Do List" heading) */}
+          {/* Right — Financial Summary */}
           <div className="w-[260px] flex-shrink-0 mt-[36px]">
             <div className="bg-[#1a1a1a] rounded-xl border border-border p-5">
               <div className="space-y-2 text-sm">
@@ -181,7 +184,7 @@ export function HomeLanding() {
         </div>
 
         {/* ─── Row 2: What's New Today + Calendar ─── */}
-        <div className="flex gap-6 mb-8">
+        <div className="flex gap-6 mb-6">
           {/* Left — What's New Today */}
           <div className="flex-1">
             <h2 className="text-lg font-bold text-dark mb-4">What's New Today ?</h2>
@@ -220,20 +223,25 @@ export function HomeLanding() {
         </div>
 
         {/* ─── Row 3: Quick Access Buttons ─── */}
-        <div className="mb-8">
-          <div className="flex gap-4 flex-wrap">
+        <div className="mb-4">
+          <div className="flex gap-4">
             {QUICK_LINKS.map((link) => (
               <button
                 key={link.id}
-                className="px-8 py-4 bg-[#1a1a1a] rounded-xl border border-border text-sm font-semibold text-dark cursor-pointer hover:border-[#444] hover:bg-[#1e1e1e] transition-colors"
+                className="w-[200px] h-[80px] bg-[#1a1a1a] rounded-xl border border-border flex items-center justify-center gap-3 text-sm font-semibold text-dark cursor-pointer hover:border-[#444] hover:bg-[#1e1e1e] transition-colors"
               >
+                <span className="text-xl">{link.icon}</span>
                 {link.label}
               </button>
             ))}
-            <button className="w-[60px] py-4 bg-[#1a1a1a] rounded-xl border border-border text-2xl text-gray cursor-pointer hover:border-[#444] hover:text-dark transition-colors">
-              +
-            </button>
           </div>
+        </div>
+
+        {/* + Button on new line */}
+        <div className="mb-8">
+          <button className="w-[200px] h-[80px] bg-[#1a1a1a] rounded-xl border border-border text-2xl text-gray cursor-pointer hover:border-[#444] hover:text-dark transition-colors flex items-center justify-center">
+            +
+          </button>
         </div>
 
       </div>

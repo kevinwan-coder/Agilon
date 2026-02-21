@@ -31,7 +31,7 @@ export function DashboardLayout({ children, activePage, onNavigate }: DashboardL
         <div className="sticky bottom-0 left-0 right-0 flex justify-center pb-4 pt-6 pointer-events-none"
           style={{ background: 'linear-gradient(transparent, var(--color-light) 40%)' }}
         >
-          <div className="relative flex items-center w-full max-w-[1050px] pointer-events-auto">
+          <div className="relative flex items-center w-full max-w-[630px] pointer-events-auto">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg opacity-70">🤖</span>
             <input
               type="text"
