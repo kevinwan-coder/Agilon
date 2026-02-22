@@ -77,25 +77,6 @@ export function DashboardTopBar({ activePage, onNavigate }: DashboardTopBarProps
           </>
         )}
 
-        {/* Separator */}
-        <div className="w-px h-5 bg-border mx-2 flex-shrink-0" />
-
-        {/* Calendar */}
-        {RIGHT_NAV.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => onNavigate(item.id)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm whitespace-nowrap transition-colors border-none cursor-pointer ${
-              activePage === item.id
-                ? 'bg-primary-light text-primary font-semibold'
-                : 'bg-transparent text-gray hover:bg-[#252525] hover:text-dark'
-            }`}
-          >
-            <span className="text-sm">{item.icon}</span>
-            {item.label}
-          </button>
-        ))}
-
         {/* Alerts */}
         <button className="relative p-2 bg-transparent border-none cursor-pointer text-gray hover:text-dark transition-colors text-lg">
           🔔
